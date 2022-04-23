@@ -1,20 +1,21 @@
 package service.impl;
 
+import dao.impl.PassInTripDaoImpl;
 import dao.impl.PassengerDaoImpl;
 import model.Company;
+import model.PassInTrip;
 import model.Passenger;
 import model.Trip;
 import service.DatabaseConnectionService;
 import service.PassengerService;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class PassengerServiceImpl implements PassengerService {
     PassengerDaoImpl passengerDao=new PassengerDaoImpl();
+    PassInTripDaoImpl passInTripDao=new PassInTripDaoImpl();
     @Override
     public void getById(long id) {
 
@@ -111,13 +112,39 @@ passengerDao.deleteById(passengerId);
     }
 
     @Override
-    public void registerTrip(Trip trip, Passenger passenger) {
-
+    public void registerTrip(PassInTrip passInTrip) {
+        passInTripDao.createPassInTrip(passInTrip);
 
     }
 
     @Override
     public void cancelTrip(long passengerId, long tripNumber) {
-
+      /*  DELETE  from pass_in_trip
+        where trip_id=1123 and psg_id=6*/
+        Statement statement = null;
+        Connection connection =
+                DatabaseConnectionService.DB_INSTANCE.createConnection();
+        try {
+           statement = connection.createStatement();
+            String query = "DELETE"+" FROM pass_in_trip " +
+                    " WHERE psg_id = " + passengerId + " AND trip_id= " + tripNumber+
+                    "";
+            statement.execute(query);
+            statement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
-}
+    }

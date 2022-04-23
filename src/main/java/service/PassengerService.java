@@ -1,5 +1,6 @@
 package service;
 
+import model.PassInTrip;
 import model.Passenger;
 import model.Trip;
 
@@ -21,7 +22,7 @@ public interface PassengerService {
 
     List<Passenger> getPassengersOfTrip(long tripNumber);
 
-    void registerTrip(Trip trip, Passenger passenger);
+    void registerTrip(PassInTrip passInTrip);
 
     void cancelTrip(long passengerId, long tripNumber);
 }
