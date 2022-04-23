@@ -6,15 +6,15 @@ import java.util.*;
 
 public interface TripService {
 
-    Trip getById(long id);
+    void getById(long id);
 
-    Set<Trip> getAll();
+    void getAll();
 
     Set<Trip> get(int offset, int perPage, String sort);
 
-    Trip save(Trip passenger);
+    void save(Trip trip);
 
-    Trip update(Trip passenger);
+    void update(long id, Trip trip);
 
     void delete(long tripId);
 

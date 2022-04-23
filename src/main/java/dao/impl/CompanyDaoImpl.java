@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.CompanyDao;
-import model.Address;
 import model.Company;
 import service.DatabaseConnectionService;
 

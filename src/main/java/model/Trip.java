@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Time;
+
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -35,6 +35,10 @@ public class Trip {
         this.townTo = townTo;
         this.timeOut = timeOut;
         this.timeIn = timeIn;
+    }
+
+    public Trip() {
+
     }
 
     public long getId() {

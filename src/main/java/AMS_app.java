@@ -7,7 +7,9 @@ import dao.impl.CompanyDaoImpl;
 import dao.impl.PassengerDaoImpl;
 import dao.impl.TripDaoImpl;
 import model.Trip;
+import resource.IOimpl.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -19,19 +21,10 @@ public class AMS_app {
         PassengerDao passengerDao = new PassengerDaoImpl();
         TripDao tripDao = new TripDaoImpl();
 
-
-//        for (int i = 4; i < 8; i++) {
-//            tripDao.createTrip(
-//                    new Trip(i, 2,
-//                            "ARM" + i,
-//                            "Yerevan" + i,
-//                            "LOndon" + i, LocalTime.of(14, 25, 36), LocalTime.of(20, 12, 03)
-//                    )
-//            );
-//        }
-
-        tripDao.update(4, new Trip(2,3,"bugj","dsfd","dgdf", LocalTime.of(1, 1, 1),LocalTime.of(2, 2, 2)));
-        System.out.println(tripDao.getTripById(4));
-
+     //AddressIOimpl.getAddressFromFile();
+        // PassengerIOImpl.getPassengersFromFile();
+       // CompanyIOImpl.getCompanyFromFile();
+       // PassInTripIOImpl.getPassInTripFromFile();
+      // TripIOimpl.getTripFromFile();
     }
 }

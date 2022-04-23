@@ -10,12 +10,13 @@ import java.util.Set;
 public class CompanyServiceImpl implements CompanyService {
     CompanyDaoImpl cdi=new CompanyDaoImpl();
     @Override
-    public Company getById(long id) { return null;
+    public void getById(long id) {
+        cdi.getCompanyById(id);
     }
 
     @Override
-    public Set<Company> getAll() {
-        return null;
+    public void getAll() {
+        cdi.getAll();
     }
 
     @Override
@@ -24,17 +25,17 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company save(Company company) {
-        return null;
+    public void save(Company company) {
+        cdi.createCompany(company);
     }
 
     @Override
-    public Company update(Company company) {
-        return null;
+    public void update(long id, Company company) {
+       cdi.update(id, company);
     }
 
     @Override
     public void delete(long companyId) {
-
+cdi.deleteById(companyId);
     }
 }

@@ -1,5 +1,6 @@
 package service.impl;
 
+import dao.impl.PassengerDaoImpl;
 import model.Passenger;
 import model.Trip;
 import service.PassengerService;
@@ -8,14 +9,16 @@ import java.util.List;
 import java.util.Set;
 
 public class PassengerServiceImpl implements PassengerService {
+    PassengerDaoImpl passengerDao=new PassengerDaoImpl();
     @Override
-    public Passenger getById(long id) {
-        return null;
+    public void getById(long id) {
+
+       passengerDao.getPassengerById(id);
     }
 
     @Override
-    public Set<Passenger> getAll() {
-        return null;
+    public void getAll() {
+        passengerDao.getAll();
     }
 
     @Override
@@ -24,18 +27,18 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
-    public Passenger save(Passenger passenger) {
-        return null;
+    public void save(Passenger passenger) {
+       passengerDao.createPassenger(passenger);
     }
 
     @Override
-    public Passenger update(Passenger passenger) {
-        return null;
+    public void update(long id, Passenger passenger) {
+        passengerDao.update(id,passenger);
     }
 
     @Override
     public void delete(long passengerId) {
-
+passengerDao.deleteById(passengerId);
     }
 
     @Override

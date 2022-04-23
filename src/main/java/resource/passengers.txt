@@ -1,4 +1,3 @@
-name,phone,country,city
 Oliviero Robertacci,595-519-3487,Brazil,São Gabriel
 Jeffrey Engel,704-332-8664,Sweden,Finspång
 Humbert Bonner,361-176-3624,Gambia,Baro Kunda
@@ -339,7 +338,6 @@ Tommy Gunney,614-347-1707,Philippines,Dungon
 Bonita Adie,402-218-6059,Indonesia,Rukem
 Mirabel Maffulli,883-714-6436,Canada,Torbay
 Benyamin Leavens,557-902-0603,China,Sanxi
-Rabi Constant,367-603-8362,Brazil,Penedo
 Loydie Izac,400-764-3678,Vietnam,Yên Mỹ
 Neil Ort,864-263-9942,Thailand,Bang Kruai
 Bryce Emanuelli,933-657-1528,China,Sandu
@@ -858,7 +856,7 @@ Merv Mundy,953-361-7183,Sweden,Deje
 Killy McCrachen,753-144-6677,Peru,Chugur
 Kalvin Kingstne,271-974-7126,Vietnam,Phu Loc
 Pernell Abbotson,513-755-8745,Thailand,Udon Thani
-Ardine Hallbord,584-759-0209,France,Saint-Maurice-l'Exil
+Ardine Hallbord,584-759-0209,France,Saint-Maurice-l
 Jase Kinset,544-426-8133,Poland,Lisia Góra
 Der Bleackley,220-727-9992,Czech Republic,Havlíčkův Brod
 Arnie Cartin,772-893-9380,Paraguay,Fram

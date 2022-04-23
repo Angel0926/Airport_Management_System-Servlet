@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.PassengerDao;
-import model.Address;
 import model.Passenger;
 import service.DatabaseConnectionService;
 
@@ -155,5 +154,38 @@ public class PassengerDaoImpl implements PassengerDao {
 
         return passengeres;
     }
+
+    public void save(Passenger passenger) {
+        Connection connection =
+                DatabaseConnectionService.DB_INSTANCE.createConnection();
+        String query = "INSERT INTO passenger (pass_name, pass_phone,address_id) " +
+                " VALUES (?, ?,?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = connection.prepareStatement(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            pstmt.setString(1, passenger.getName());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            pstmt.setString(2, passenger.getPhone());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            pstmt.setLong(3, passenger.getIdAddress());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            pstmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+}
 

@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.Objects;
 public class Company {
@@ -18,6 +18,10 @@ public class Company {
         this.id = id;
         this.companyName = companyName;
         this.founding_date = founding_date;
+    }
+
+    public Company() {
+
     }
 
     public long getId() {
