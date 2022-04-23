@@ -8,6 +8,9 @@ import dao.impl.PassengerDaoImpl;
 import dao.impl.TripDaoImpl;
 import model.Trip;
 import resource.IOimpl.*;
+import service.impl.CompanyServiceImpl;
+import service.impl.PassengerServiceImpl;
+import service.impl.TripServiceImpl;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -20,11 +23,13 @@ public class AMS_app {
         CompanyDao companyDao = new CompanyDaoImpl();
         PassengerDao passengerDao = new PassengerDaoImpl();
         TripDao tripDao = new TripDaoImpl();
-
-     //AddressIOimpl.getAddressFromFile();
+        TripServiceImpl tripService=new TripServiceImpl();
+PassengerServiceImpl passengerService=new PassengerServiceImpl();
+        System.out.println(passengerService.getPassengersOfTrip(1145));
+        //AddressIOimpl.getAddressFromFile();
         // PassengerIOImpl.getPassengersFromFile();
-       // CompanyIOImpl.getCompanyFromFile();
-       // PassInTripIOImpl.getPassInTripFromFile();
-      // TripIOimpl.getTripFromFile();
+        // CompanyIOImpl.getCompanyFromFile();
+        // PassInTripIOImpl.getPassInTripFromFile();
+        // TripIOimpl.getTripFromFile();
     }
 }

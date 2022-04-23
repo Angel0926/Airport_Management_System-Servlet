@@ -34,7 +34,6 @@ public class TripIOimpl {
                 trip.setTownTo(words[4]);
                 trip.setTimeOut(LocalDateTime.parse(words[5], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")).toLocalTime());
                 trip.setTimeIn(LocalDateTime.parse(words[6], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")).toLocalTime());
-
                 tripDao.createTrip(trip);
                 System.out.println();
             }

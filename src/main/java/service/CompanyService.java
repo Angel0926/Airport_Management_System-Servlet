@@ -8,7 +8,7 @@ public interface CompanyService {
 
     void getById(long id);
 
-    void getAll();
+    Set<Company> getAll();
 
     Set<Company> get(int offset, int perPage, String sort);
 
