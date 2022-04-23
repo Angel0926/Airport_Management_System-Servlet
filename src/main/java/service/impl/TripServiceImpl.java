@@ -1,13 +1,13 @@
 package service.impl;
 
 import dao.impl.TripDaoImpl;
-import model.Company;
 import model.Trip;
 import service.DatabaseConnectionService;
 import service.TripService;
 
 import java.sql.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -80,11 +80,69 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public List<Trip> getTripsFrom(String city) {
-        return null;
+      /* SELECT *
+from trip
+where town_from= 'Paris'*/
+        List<Trip> tripes = null;
+        try (Connection connection = DatabaseConnectionService
+                .DB_INSTANCE.createConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet =
+                     statement.executeQuery(
+                             "SELECT * FROM trip " +
+                                     "WHERE town_from = '" + city + "'")) {
+
+            tripes = new ArrayList<>();
+            Trip trip;
+            while (resultSet.next()) {
+                trip= new Trip(
+                        resultSet.getLong("comp_id"),
+                        resultSet.getString("plane"),
+                        resultSet.getString("town_from"),
+                        resultSet.getString("town_to"),
+                        LocalTime.parse(resultSet.getTime("time_out").toString()),
+                        LocalTime.parse(resultSet.getTime("time_in").toString())
+                );
+                tripes.add(trip);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return tripes;
     }
 
     @Override
     public List<Trip> getTripsTo(String city) {
-        return null;
+        /* SELECT *
+from trip
+where town_to= 'Paris'*/
+        List<Trip> tripes = null;
+        try (Connection connection = DatabaseConnectionService
+                .DB_INSTANCE.createConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet =
+                     statement.executeQuery(
+                             "SELECT * FROM trip " +
+                                     "WHERE town_to = '" + city + "'")) {
+
+            tripes = new ArrayList<>();
+            Trip trip;
+            while (resultSet.next()) {
+                trip= new Trip(
+                        resultSet.getLong("comp_id"),
+                        resultSet.getString("plane"),
+                        resultSet.getString("town_from"),
+                        resultSet.getString("town_to"),
+                        LocalTime.parse(resultSet.getTime("time_out").toString()),
+                        LocalTime.parse(resultSet.getTime("time_in").toString())
+                );
+                tripes.add(trip);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return tripes;
     }
 }

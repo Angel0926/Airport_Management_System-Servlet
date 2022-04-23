@@ -11,10 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PassengerServiceImpl implements PassengerService {
     PassengerDaoImpl passengerDao=new PassengerDaoImpl();
@@ -85,60 +82,33 @@ passengerDao.deleteById(passengerId);
         from passenger
         join pass_in_trip pst on passenger.id=pst.psg_id
         where trip_id=1145;*/
-        Statement statement=null;
+
         List<Passenger> passengeres = null;
-        Connection connection = DatabaseConnectionService
+       try(Connection connection = DatabaseConnectionService
                 .DB_INSTANCE.createConnection();
-        try {
-            statement = connection.createStatement();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        ResultSet resultSet = null;
-        try {
-            resultSet = statement.executeQuery(
-                    "SELECT pass_name"+"FROM Passenger " +
-                            "join pass_in_trip pst  on  passenger.id=pst.psg_id"+
-                            "where trip_id="+tripNumber+";");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        {
+           Statement statement = connection.createStatement();
 
-            passengeres = new LinkedList<>();
-            Passenger passenger;
-            while (true) {
-                try {
-                    if (!resultSet.next()) break;
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-                try {
-                    passenger = new Passenger(
-                            resultSet.getLong("address_id"),
-                            resultSet.getString("pass_name"),
-                            resultSet.getString("pass_phone")
+        ResultSet  resultSet = statement.executeQuery(
+                "SELECT pass_name, pass_phone, address_id " +
+                        "FROM passenger p " +
+                        "JOIN pass_in_trip pst ON p.id = pst.psg_id " +
+                        "WHERE trip_id = " + tripNumber + ";")) {
+        passengeres = new ArrayList<>();
+        Passenger passenger;
+        while (resultSet.next()) {
+            passenger = new Passenger(
+                    resultSet.getLong("address_id"),
+                    resultSet.getString("pass_name"),
+                    resultSet.getString("pass_phone")
 
-                    );
-                    passengeres.add(passenger);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-         finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }}
+            );
+            passengeres.add(passenger);
+        } }catch (SQLException e) {
+           throw new RuntimeException(e);
+       }
 
         return passengeres;
-    }}
+    }
 
     @Override
     public void registerTrip(Trip trip, Passenger passenger) {

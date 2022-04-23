@@ -25,11 +25,12 @@ public class AMS_app {
         TripDao tripDao = new TripDaoImpl();
         TripServiceImpl tripService=new TripServiceImpl();
 PassengerServiceImpl passengerService=new PassengerServiceImpl();
-        System.out.println(passengerService.getPassengersOfTrip(1145));
-        //AddressIOimpl.getAddressFromFile();
-        // PassengerIOImpl.getPassengersFromFile();
+        System.out.println(tripService.getTripsTo("Paris"));
+       // AddressIOimpl.getAddressFromFile();
+       // PassengerIOImpl.getPassengersFromFile();
         // CompanyIOImpl.getCompanyFromFile();
-        // PassInTripIOImpl.getPassInTripFromFile();
-        // TripIOimpl.getTripFromFile();
+         // TripIOimpl.getTripFromFile();
+       // PassInTripIOImpl.getPassInTripFromFile();
+
     }
 }

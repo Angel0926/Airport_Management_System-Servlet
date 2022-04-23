@@ -16,8 +16,9 @@ public class TripDaoImpl implements TripDao {
                 DatabaseConnectionService.DB_INSTANCE.createConnection();
 
         String query =
-                "INSERT INTO Trip (comp_id,plane,town_from,town_to,time_out, time_in)" +
+                "INSERT INTO Trip (id,comp_id,plane,town_from,town_to,time_out, time_in)" +
                         " VALUES ('" +
+                        trip.getId() + "', '" +
                         trip.getIdComp() + "', '" +
                         trip.getPlane() + "', '" +
                         trip.getTownFrom() + "', '" +
