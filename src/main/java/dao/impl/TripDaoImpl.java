@@ -150,7 +150,7 @@ public class TripDaoImpl implements TripDao {
         ) {
             tripses = new HashSet<>();
 
-           Trip trip;
+            Trip trip;
             while (resultSet.next()) {
                 trip = new Trip(
                         resultSet.getInt("id"),
@@ -171,4 +171,4 @@ public class TripDaoImpl implements TripDao {
 
         return tripses;
     }
-    }
+}

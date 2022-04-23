@@ -2,24 +2,23 @@ package service.impl;
 
 import dao.impl.PassInTripDaoImpl;
 import dao.impl.PassengerDaoImpl;
-import model.Company;
 import model.PassInTrip;
 import model.Passenger;
-import model.Trip;
 import service.DatabaseConnectionService;
 import service.PassengerService;
 
 import java.sql.*;
 import java.util.*;
-import java.util.Date;
+
 
 public class PassengerServiceImpl implements PassengerService {
-    PassengerDaoImpl passengerDao=new PassengerDaoImpl();
-    PassInTripDaoImpl passInTripDao=new PassInTripDaoImpl();
+    PassengerDaoImpl passengerDao = new PassengerDaoImpl();
+    PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl();
+
     @Override
     public void getById(long id) {
 
-       passengerDao.getPassengerById(id);
+        passengerDao.getPassengerById(id);
     }
 
     @Override
@@ -64,17 +63,17 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Override
     public void save(Passenger passenger) {
-       passengerDao.createPassenger(passenger);
+        passengerDao.createPassenger(passenger);
     }
 
     @Override
     public void update(long id, Passenger passenger) {
-        passengerDao.update(id,passenger);
+        passengerDao.update(id, passenger);
     }
 
     @Override
     public void delete(long passengerId) {
-passengerDao.deleteById(passengerId);
+        passengerDao.deleteById(passengerId);
     }
 
     @Override
@@ -85,28 +84,29 @@ passengerDao.deleteById(passengerId);
         where trip_id=1145;*/
 
         List<Passenger> passengeres = null;
-       try(Connection connection = DatabaseConnectionService
+        try (Connection connection = DatabaseConnectionService
                 .DB_INSTANCE.createConnection();
-           Statement statement = connection.createStatement();
+             Statement statement = connection.createStatement();
 
-        ResultSet  resultSet = statement.executeQuery(
-                "SELECT pass_name, pass_phone, address_id " +
-                        "FROM passenger p " +
-                        "JOIN pass_in_trip pst ON p.id = pst.psg_id " +
-                        "WHERE trip_id = " + tripNumber + ";")) {
-        passengeres = new ArrayList<>();
-        Passenger passenger;
-        while (resultSet.next()) {
-            passenger = new Passenger(
-                    resultSet.getLong("address_id"),
-                    resultSet.getString("pass_name"),
-                    resultSet.getString("pass_phone")
+             ResultSet resultSet = statement.executeQuery(
+                     "SELECT pass_name, pass_phone, address_id " +
+                             "FROM passenger p " +
+                             "JOIN pass_in_trip pst ON p.id = pst.psg_id " +
+                             "WHERE trip_id = " + tripNumber + ";")) {
+            passengeres = new ArrayList<>();
+            Passenger passenger;
+            while (resultSet.next()) {
+                passenger = new Passenger(
+                        resultSet.getLong("address_id"),
+                        resultSet.getString("pass_name"),
+                        resultSet.getString("pass_phone")
 
-            );
-            passengeres.add(passenger);
-        } }catch (SQLException e) {
-           throw new RuntimeException(e);
-       }
+                );
+                passengeres.add(passenger);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         return passengeres;
     }
@@ -125,16 +125,15 @@ passengerDao.deleteById(passengerId);
         Connection connection =
                 DatabaseConnectionService.DB_INSTANCE.createConnection();
         try {
-           statement = connection.createStatement();
-            String query = "DELETE"+" FROM pass_in_trip " +
-                    " WHERE psg_id = " + passengerId + " AND trip_id= " + tripNumber+
+            statement = connection.createStatement();
+            String query = "DELETE" + " FROM pass_in_trip " +
+                    " WHERE psg_id = " + passengerId + " AND trip_id= " + tripNumber +
                     "";
             statement.execute(query);
             statement.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
-        finally {
+        } finally {
             try {
                 if (statement != null) {
                     statement.close();
@@ -147,4 +146,4 @@ passengerDao.deleteById(passengerId);
             }
         }
     }
-    }
+}

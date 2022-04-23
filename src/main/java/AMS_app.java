@@ -27,8 +27,8 @@ public class AMS_app {
         TripDao tripDao = new TripDaoImpl();
         TripServiceImpl tripService=new TripServiceImpl();
 
-PassengerServiceImpl passengerService=new PassengerServiceImpl();
-passengerService.cancelTrip(3,1123);
+//PassengerServiceImpl passengerService=new PassengerServiceImpl();
+//passengerService.cancelTrip(3,1123);
 //      passengerService.registerTrip(new PassInTrip(1188,10,LocalDate.parse(
 //              "2003-04-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),"3b"));
        // AddressIOimpl.getAddressFromFile();

@@ -2,18 +2,17 @@ package service.impl;
 
 import dao.impl.CompanyDaoImpl;
 import model.Company;
-import model.Passenger;
 import service.CompanyService;
 import service.DatabaseConnectionService;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 
 public class CompanyServiceImpl implements CompanyService {
-    CompanyDaoImpl cdi=new CompanyDaoImpl();
+    CompanyDaoImpl cdi = new CompanyDaoImpl();
+
     @Override
     public void getById(long id) {
         cdi.getCompanyById(id);
@@ -21,7 +20,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Set<Company> getAll() {
-      return   cdi.getAll();
+        return cdi.getAll();
     }
 
     @Override
@@ -64,11 +63,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void update(long id, Company company) {
-       cdi.update(id, company);
+        cdi.update(id, company);
     }
 
     @Override
     public void delete(long companyId) {
-cdi.deleteById(companyId);
+        cdi.deleteById(companyId);
     }
 }

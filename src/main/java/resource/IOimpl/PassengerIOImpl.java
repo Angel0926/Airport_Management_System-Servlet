@@ -51,8 +51,9 @@ public class PassengerIOImpl {
             throw new RuntimeException(e);
         }
     }
+
     public static int addressIDCommit(String[] word) {
-        int addresId=0;
+        int addresId = 0;
         Connection connection =
                 DatabaseConnectionService.DB_INSTANCE.createConnection();
 

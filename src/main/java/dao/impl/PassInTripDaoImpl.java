@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class PassInTripDaoImpl implements PassInTripDao {
     @Override
-    public  void createPassInTrip(PassInTrip passInTrip) {
+    public void createPassInTrip(PassInTrip passInTrip) {
         Connection connection =
                 DatabaseConnectionService.DB_INSTANCE.createConnection();
 
@@ -20,7 +20,7 @@ public class PassInTripDaoImpl implements PassInTripDao {
                         passInTrip.getIdTrip() + "', '" +
                         passInTrip.getDate() + "', '" +
                         passInTrip.getIdPsg() + "', '" +
-                        passInTrip.getPlace()  + "');";
+                        passInTrip.getPlace() + "');";
 
         Statement statement = null;
         try {

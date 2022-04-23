@@ -45,7 +45,7 @@ public class TripServiceImpl implements TripService {
             tripes = new HashSet<>();
             Trip trip;
             while (resultSet.next()) {
-                trip= new Trip(
+                trip = new Trip(
                         resultSet.getLong("comp_id"),
                         resultSet.getString("plane"),
                         resultSet.getString("town_from"),
@@ -95,7 +95,7 @@ where town_from= 'Paris'*/
             tripes = new ArrayList<>();
             Trip trip;
             while (resultSet.next()) {
-                trip= new Trip(
+                trip = new Trip(
                         resultSet.getLong("comp_id"),
                         resultSet.getString("plane"),
                         resultSet.getString("town_from"),
@@ -129,7 +129,7 @@ where town_to= 'Paris'*/
             tripes = new ArrayList<>();
             Trip trip;
             while (resultSet.next()) {
-                trip= new Trip(
+                trip = new Trip(
                         resultSet.getLong("comp_id"),
                         resultSet.getString("plane"),
                         resultSet.getString("town_from"),

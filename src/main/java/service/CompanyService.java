@@ -14,8 +14,8 @@ public interface CompanyService {
 
     void save(Company company);
 
-   void update(long id,Company company);
+    void update(long id, Company company);
 
-   void delete(long companyId);
+    void delete(long companyId);
 
 }

@@ -137,7 +137,7 @@ public class PassengerDaoImpl implements PassengerDao {
 
             Passenger passenger;
             while (resultSet.next()) {
-                passenger= new Passenger(
+                passenger = new Passenger(
                         resultSet.getInt("id"),
                         resultSet.getInt("address_id"),
                         resultSet.getString("pass_name"),
