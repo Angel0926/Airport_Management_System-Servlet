@@ -1,29 +1,34 @@
 package model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "passenger")
 public class Passenger {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long idAddress;
+    @Column(name = "name",nullable = false,length = 50)
     private String name;
+    @Column(name = "phone",nullable = false,unique = true,length = 50)
     private String phone;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "address_passenger_fk"))
+    private Address address;
+
 
     public Passenger() {
     }
-
-    public Passenger(long idAddress, String name, String phone) {
-        this.idAddress = idAddress;
-        this.name = name;
-        this.phone = phone;
+    public Address getAddress() {
+        return address;
     }
 
-    public Passenger(long id, long idAddress, String name, String phone) {
-        this.id = id;
-        this.idAddress = idAddress;
-        this.name = name;
-        this.phone = phone;
+    public void setAddress(Address address) {
+        this.address = address;
     }
+
 
     public long getId() {
         return id;
@@ -33,13 +38,6 @@ public class Passenger {
         this.id = id;
     }
 
-    public long getIdAddress() {
-        return idAddress;
-    }
-
-    public void setIdAddress(long idAddress) {
-        this.idAddress = idAddress;
-    }
 
     public String getName() {
         return name;
@@ -62,19 +60,19 @@ public class Passenger {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Passenger passenger = (Passenger) o;
-        return id == passenger.id && idAddress == passenger.idAddress && Objects.equals(name, passenger.name) && Objects.equals(phone, passenger.phone);
+        return id == passenger.id && Objects.equals(name, passenger.name) && Objects.equals(phone, passenger.phone) && Objects.equals(address, passenger.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idAddress, name, phone);
+        return Objects.hash(id,  name, phone);
     }
 
     @Override
     public String toString() {
         return "Passenger{" +
                 "id=" + id +
-                ", idAddress=" + idAddress +
+                ", idAddress=" +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 "}\n";

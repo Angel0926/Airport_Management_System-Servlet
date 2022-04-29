@@ -1,45 +1,29 @@
 package model;
 
 
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Objects;
-
+@Entity
+@Table(name = "trip")
 public class Trip {
-
+    @Id
     private long id;
-    private long idComp;
+
+    @Column(name = "plane",nullable = false,length = 50)
     private String plane;
+    @Column(name = "town_from",nullable = false,length = 50)
     private String townFrom;
+    @Column(name = "town_to",nullable = false,length = 50)
     private String townTo;
+    @Column(name = "time_out",nullable = false)
     private LocalTime timeOut;
+    @Column(name = "time_in",nullable = false)
     private LocalTime timeIn;
 
-    public Trip(long idComp, String plane,
-                String townFrom, String townTo,
-                LocalTime timeOut, LocalTime timeIn) {
-        this.idComp = idComp;
-        this.plane = plane;
-        this.townFrom = townFrom;
-        this.townTo = townTo;
-        this.timeOut = timeOut;
-        this.timeIn = timeIn;
-    }
-
-    public Trip(long id, long idComp, String plane,
-                String townFrom, String townTo,
-                LocalTime timeOut, LocalTime timeIn) {
-        this.id = id;
-        this.idComp = idComp;
-        this.plane = plane;
-        this.townFrom = townFrom;
-        this.townTo = townTo;
-        this.timeOut = timeOut;
-        this.timeIn = timeIn;
-    }
-
-    public Trip() {
-
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_company", foreignKey =@ForeignKey(name = "company_trip_fk"))
+    private  Company company;
 
     public long getId() {
         return id;
@@ -47,14 +31,6 @@ public class Trip {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getIdComp() {
-        return idComp;
-    }
-
-    public void setIdComp(long idComp) {
-        this.idComp = idComp;
     }
 
     public String getPlane() {
@@ -81,7 +57,6 @@ public class Trip {
         this.townTo = townTo;
     }
 
-
     public LocalTime getTimeOut() {
         return timeOut;
     }
@@ -98,29 +73,37 @@ public class Trip {
         this.timeIn = timeIn;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trip trip = (Trip) o;
-        return id == trip.id && idComp == trip.idComp && Objects.equals(plane, trip.plane) && Objects.equals(townFrom, trip.townFrom) && Objects.equals(townTo, trip.townTo) && Objects.equals(timeOut, trip.timeOut) && Objects.equals(timeIn, trip.timeIn);
+        return id == trip.id && Objects.equals(plane, trip.plane) && Objects.equals(townFrom, trip.townFrom) && Objects.equals(townTo, trip.townTo) && Objects.equals(timeOut, trip.timeOut) && Objects.equals(timeIn, trip.timeIn) && Objects.equals(company, trip.company);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idComp, plane, townFrom, townTo, timeOut, timeIn);
+        return Objects.hash(id, plane, townFrom, townTo, timeOut, timeIn, company);
     }
 
     @Override
     public String toString() {
         return "Trip{" +
                 "id=" + id +
-                ", idComp=" + idComp +
                 ", plane='" + plane + '\'' +
                 ", townFrom='" + townFrom + '\'' +
                 ", townTo='" + townTo + '\'' +
                 ", timeOut=" + timeOut +
                 ", timeIn=" + timeIn +
-                "}\n";
+                ", company=" + company +
+                '}';
     }
 }

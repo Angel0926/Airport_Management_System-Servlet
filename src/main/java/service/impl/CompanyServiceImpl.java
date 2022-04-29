@@ -3,7 +3,6 @@ package service.impl;
 import dao.impl.CompanyDaoImpl;
 import model.Company;
 import service.CompanyService;
-import service.DatabaseConnectionService;
 
 import java.sql.*;
 import java.util.HashSet;
@@ -25,35 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Set<Company> get(int offset, int perPage, String sort) {
-       /* SELECT *
-                from company
-        order by company_name
-        LIMIT 5 OFFSET 10*/
-
-        Set<Company> companies = null;
-        try (Connection connection = DatabaseConnectionService
-                .DB_INSTANCE.createConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet =
-                     statement.executeQuery(
-                             "SELECT * FROM company " +
-                                     "order by " + sort + " limit " + perPage +
-                                     " OFFSET " + offset + ";")) {
-
-            companies = new HashSet<>();
-            Company company;
-            while (resultSet.next()) {
-                company = new Company(
-                        resultSet.getString("company_name"),
-                        resultSet.getDate("founding_date").toLocalDate()
-                );
-                companies.add(company);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-        return companies;
+      return null;
     }
 
     @Override

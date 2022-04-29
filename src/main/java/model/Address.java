@@ -1,23 +1,27 @@
 package model;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "address", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_country_city", columnNames = {"country", "city"})})
 public class Address {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "country", nullable = false, length = 50)
     private String country;
+    @Column(name = "city", nullable = false, length = 50)
     private String city;
 
-    public Address(String country, String city) {
-        this.country = country;
-        this.city = city;
-    }
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    private List<Passenger> passengers = new ArrayList<>();
 
-    public Address(long id, String country, String city) {
-        this.id = id;
-        this.country = country;
-        this.city = city;
-    }
 
     public Address() {
 
