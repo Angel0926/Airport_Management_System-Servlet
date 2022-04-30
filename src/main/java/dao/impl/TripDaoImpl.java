@@ -2,6 +2,8 @@ package dao.impl;
 
 import dao.TripDao;
 import model.Trip;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.sql.*;
 import java.time.LocalTime;
@@ -10,8 +12,12 @@ import java.util.Set;
 
 public class TripDaoImpl implements TripDao {
     @Override
-    public void createTrip(Trip trip) {
-
+    public void createTrip(Trip trip, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(trip);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override

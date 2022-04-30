@@ -2,43 +2,46 @@ package service.impl;
 
 import dao.impl.CompanyDaoImpl;
 import model.Company;
-import service.CompanyService;
+import org.hibernate.SessionFactory;
 
-import java.sql.*;
-import java.util.HashSet;
+import java.time.LocalDate;
 import java.util.Set;
 
 
-public class CompanyServiceImpl implements CompanyService {
-    CompanyDaoImpl cdi = new CompanyDaoImpl();
+public class CompanyServiceImpl  {
+    CompanyDaoImpl companyDao = new CompanyDaoImpl();
 
-    @Override
     public void getById(long id) {
-        cdi.getCompanyById(id);
+
     }
 
-    @Override
+
     public Set<Company> getAll() {
-        return cdi.getAll();
+        return null;
     }
 
-    @Override
+
     public Set<Company> get(int offset, int perPage, String sort) {
-      return null;
+      return  null;
     }
 
-    @Override
-    public void save(Company company) {
-        cdi.createCompany(company);
+
+    public void save(Company company, SessionFactory sessionFactory){
+        companyDao.createCompany(company,sessionFactory);
+
+
     }
 
-    @Override
-    public void update(long id, Company company) {
-        cdi.update(id, company);
+
+    public void update(Long id,Company company, SessionFactory sessionFactory) {
+companyDao.update(company,sessionFactory);
     }
 
-    @Override
+
     public void delete(long companyId) {
-        cdi.deleteById(companyId);
+
     }
+
+
+
 }

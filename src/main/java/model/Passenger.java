@@ -1,7 +1,9 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "passenger")
@@ -14,9 +16,17 @@ public class Passenger {
     @Column(name = "phone",nullable = false,unique = true,length = 50)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "address_passenger_fk"))
     private Address address;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Pass_In_Trip",
+            joinColumns = { @JoinColumn(name = "id_psg") },
+            inverseJoinColumns = { @JoinColumn(name = "id_trip") }
+    )
+   private Set<Trip> trips= new HashSet<>();
 
 
     public Passenger() {
@@ -28,7 +38,6 @@ public class Passenger {
     public void setAddress(Address address) {
         this.address = address;
     }
-
 
     public long getId() {
         return id;

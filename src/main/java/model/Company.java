@@ -18,8 +18,6 @@ public class Company {
     @Column(name = "founding_date",nullable = false)
     private LocalDate foundingDate;
 
-    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
-    private List<Trip> trips=new ArrayList<>();
 
 
     public Company() {
@@ -57,25 +55,20 @@ public class Company {
         this.foundingDate = foundingDate;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Company company = (Company) o;
-        return id == company.id && Objects.equals(companyName, company.companyName) && Objects.equals(foundingDate, company.foundingDate) && Objects.equals(trips, company.trips);
+        return id == company.id && Objects.equals(companyName, company.companyName)
+                && Objects.equals(foundingDate, company.foundingDate) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, companyName, foundingDate, trips);
+        return Objects.hash(id, companyName,
+                foundingDate);
     }
 
     @Override
@@ -84,7 +77,9 @@ public class Company {
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
                 ", foundingDate=" + foundingDate +
-                ", trips=" + trips +
+                ", trips=" +
                 '}';
     }
+
+
 }

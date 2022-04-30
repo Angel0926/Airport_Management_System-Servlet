@@ -1,65 +1,49 @@
 package service.impl;
 
-import dao.impl.PassInTripDaoImpl;
+import dao.impl.CompanyDaoImpl;
 import dao.impl.PassengerDaoImpl;
-import model.PassInTrip;
+import model.Company;
 import model.Passenger;
-import service.PassengerService;
+import org.hibernate.SessionFactory;
 
-import java.sql.*;
-import java.util.*;
+import java.util.Set;
 
 
-public class PassengerServiceImpl implements PassengerService {
-    PassengerDaoImpl passengerDao = new PassengerDaoImpl();
-    PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl();
+public class PassengerServiceImpl {
+   PassengerDaoImpl passengerDao=new PassengerDaoImpl();
 
-    @Override
+
     public void getById(long id) {
 
-        passengerDao.getPassengerById(id);
-    }
-
-    @Override
-    public void getAll() {
-        passengerDao.getAll();
-    }
-
-    @Override
-    public Set<Passenger> get(int offset, int perPage, String sort) {
-    return  null;
     }
 
 
-    @Override
-    public void save(Passenger passenger) {
-        passengerDao.createPassenger(passenger);
+    public Set<Company> getAll() {
+        return null;
     }
 
-    @Override
-    public void update(long id, Passenger passenger) {
-        passengerDao.update(id, passenger);
-    }
 
-    @Override
-    public void delete(long passengerId) {
-        passengerDao.deleteById(passengerId);
-    }
-
-    @Override
-    public List<Passenger> getPassengersOfTrip(long tripNumber) {
+    public Set<Company> get(int offset, int perPage, String sort) {
       return  null;
     }
 
-    @Override
-    public void registerTrip(PassInTrip passInTrip) {
-        passInTripDao.createPassInTrip(passInTrip);
+
+    public void save(Passenger passenger, SessionFactory sessionFactory){
+        passengerDao.createPassenger(passenger,sessionFactory);
+
 
     }
 
-    @Override
-    public void cancelTrip(long passengerId, long tripNumber) {
 
-        }
+    public void update(Long id,Passenger passenger, SessionFactory sessionFactory) {
+
     }
 
+
+    public void delete(long companyId) {
+
+    }
+
+
+
+}

@@ -6,20 +6,19 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "address", uniqueConstraints = {
-        @UniqueConstraint(name = "unique_country_city", columnNames = {"country", "city"})})
+@Table(name = "address")
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "country", nullable = false, length = 50)
+    @Column(name = "CountrY", nullable = false, length = 50)
     private String country;
-    @Column(name = "city", nullable = false, length = 50)
+    @Column(name = "CitY", nullable = false, length = 50)
     private String city;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address")
     private List<Passenger> passengers = new ArrayList<>();
 
 
@@ -27,8 +26,20 @@ public class Address {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setId(long id) {

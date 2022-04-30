@@ -2,21 +2,28 @@ package dao.impl;
 
 import dao.PassengerDao;
 import model.Passenger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.sql.*;
 import java.util.HashSet;
 import java.util.Set;
 
 public class PassengerDaoImpl implements PassengerDao {
-    @Override
-    public void createPassenger(Passenger passenger) {
-
+@Override
+    public void createPassenger(Passenger passenger, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(passenger);
+        session.getTransaction().commit();
+        session.close();
     }
 
     @Override
     public void update(long id, Passenger passenger) {
 
     }
+
 
     @Override
     public void deleteById(long id) {
