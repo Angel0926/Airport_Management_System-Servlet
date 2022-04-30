@@ -1,8 +1,6 @@
 package model;
 
 
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;

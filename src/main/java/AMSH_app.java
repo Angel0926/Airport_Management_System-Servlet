@@ -1,16 +1,9 @@
 
-import model.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
-import resource.IOimpl.*;
-import service.impl.CompanyServiceImpl;
-
-import java.time.LocalDate;
 
 
-public class AMS_app {
+public class AMSH_app {
 
     public static void main(String[] args) {
         Configuration configuration = new Configuration();

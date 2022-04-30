@@ -5,8 +5,6 @@ import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.sql.*;
-import java.util.HashSet;
 import java.util.Set;
 
 public class PassengerDaoImpl implements PassengerDao {

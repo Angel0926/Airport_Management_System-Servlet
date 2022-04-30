@@ -1,19 +1,11 @@
 package resource.IOimpl;
 
 
-import dao.PassInTripDao;
-import dao.impl.CompanyDaoImpl;
-import dao.impl.PassInTripDaoImpl;
-import dao.impl.PassengerDaoImpl;
 import dao.impl.TripDaoImpl;
-import model.Address;
-import model.PassInTrip;
-import model.Passenger;
 import model.Trip;
 import org.hibernate.SessionFactory;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

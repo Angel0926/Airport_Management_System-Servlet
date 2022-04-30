@@ -5,9 +5,7 @@ import model.PassInTrip;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 
 public class PassInTripDaoImpl implements PassInTripDao {
     @Override

@@ -3,16 +3,13 @@ package resource.IOimpl;
 
 import dao.PassInTripDao;
 import dao.impl.PassInTripDaoImpl;
-import dao.impl.TripDaoImpl;
 import model.PassInTrip;
-import model.Trip;
 import org.hibernate.SessionFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 

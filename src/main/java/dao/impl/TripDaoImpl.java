@@ -5,9 +5,6 @@ import model.Trip;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.sql.*;
-import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 
 public class TripDaoImpl implements TripDao {
