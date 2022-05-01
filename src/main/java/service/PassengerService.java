@@ -16,12 +16,12 @@ public interface PassengerService {
 
     public void save(Passenger passenger, SessionFactory sessionFactory);
 
+    void update(long id, Passenger passenger, SessionFactory sessionFactory);
+
     void getAll();
 
     Set<Passenger> get(int offset, int perPage, String sort);
 
-
-    void update(long id, Passenger passenger);
 
     List<Passenger> getPassengersOfTrip(long tripNumber);
 

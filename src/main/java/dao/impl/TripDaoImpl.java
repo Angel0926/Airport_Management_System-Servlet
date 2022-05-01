@@ -48,12 +48,19 @@ public class TripDaoImpl implements TripDao {
         session.close();
     }
     @Override
-    public void update(long id, Trip trip) {
-
+    public void update(long id, Trip trip, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+       Trip old = getTripById(id, sessionFactory);
+        old.setPlane(trip.getPlane());
+        old.setTownFrom(trip.getTownFrom());
+        old.setTownTo(trip.getTownTo());
+        old.setTimeIn(trip.getTimeIn());
+        old.setTimeOut(trip.getTimeOut());
+        session.update(old);
+        session.getTransaction().commit();
+        sessionFactory.close();
     }
-
-
-
 
 
     @Override

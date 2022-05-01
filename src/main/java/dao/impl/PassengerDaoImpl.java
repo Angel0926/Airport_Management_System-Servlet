@@ -2,7 +2,6 @@ package dao.impl;
 
 import dao.PassengerDao;
 
-import model.Address;
 import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -49,8 +48,15 @@ public class PassengerDaoImpl implements PassengerDao {
         session.close();
     }
     @Override
-    public void update(long id, Passenger passenger) {
-
+    public void update(long id, Passenger passenger, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Passenger old = getPassengerById(id, sessionFactory);
+        old.setPhone(passenger.getPhone());
+        old.setName(passenger.getName());
+        session.update(old);
+        session.getTransaction().commit();
+        sessionFactory.close();
     }
 
 

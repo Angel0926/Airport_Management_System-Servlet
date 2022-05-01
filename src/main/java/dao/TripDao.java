@@ -11,10 +11,10 @@ public interface TripDao {
 
     void deleteById(long id, SessionFactory sessionFactory);
 
-    void update(long id, Trip trip);
-
 
     Trip getTripById(long id, SessionFactory sessionFactory);
+
+    void update(long id, Trip trip, SessionFactory sessionFactory);
 
     Set<Trip> getAll();
 }

@@ -17,12 +17,13 @@ public class AddressDaoImpl implements AddressDao {
         session.getTransaction().commit();
         session.close();
     }
+
     @Override
     public void deleteById(long id, SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Address address = null;
-        address=getAddressById(id,sessionFactory);
+        address = getAddressById(id, sessionFactory);
         session.delete(address);
         session.getTransaction().commit();
         session.close();
@@ -30,33 +31,40 @@ public class AddressDaoImpl implements AddressDao {
     }
 
     @Override
-    public Address getAddressById(long id,SessionFactory sessionFactory) {
+    public Address getAddressById(long id, SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
         Address address = null;
         try {
             address = session.get(Address.class, id);
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            try {if(session != null) session.close();} catch(Exception ex) {}
+            try {
+                if (session != null) session.close();
+            } catch (Exception ex) {
+            }
         }
         return address;
     }
-    @Override
-    public void update(long id, Address address) {
-
-    }
 
     @Override
-    public void deleteById(long id) {
+    public void update(long id, SessionFactory sessionFactory, Address address) {
 
-    }
-
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            Address old = getAddressById(id, sessionFactory);
+            old.setCountry(address.getCountry());
+            old.setCity(address.getCity());
+            session.update(old);
+            session.getTransaction().commit();
+            sessionFactory.close();
+        }
 
 
     @Override
     public Set<Address> getAll() {
-return  null;
+        return null;
 
-}}
+    }
+}

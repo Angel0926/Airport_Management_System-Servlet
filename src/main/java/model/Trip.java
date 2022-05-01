@@ -42,6 +42,17 @@ public class Trip implements Serializable {
     )
     private Set<Passenger> passenger = new HashSet<>();
 
+    public Trip() {
+    }
+
+    public Trip(String plane, String townFrom, String townTo, LocalTime timeOut, LocalTime timeIn) {
+        this.plane = plane;
+        this.townFrom = townFrom;
+        this.townTo = townTo;
+        this.timeOut = timeOut;
+        this.timeIn = timeIn;
+    }
+
     public long getId() {
         return id;
     }

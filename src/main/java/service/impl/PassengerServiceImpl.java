@@ -31,6 +31,11 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
+    public void update(long id, Passenger passenger, SessionFactory sessionFactory) {
+        passengerDao.update(id, passenger, sessionFactory);
+    }
+
+    @Override
     public void getAll() {
 
     }
@@ -38,12 +43,6 @@ public class PassengerServiceImpl implements PassengerService {
     @Override
     public Set<Passenger> get(int offset, int perPage, String sort) {
         return null;
-    }
-
-
-    @Override
-    public void update(long id, Passenger passenger) {
-
     }
 
 

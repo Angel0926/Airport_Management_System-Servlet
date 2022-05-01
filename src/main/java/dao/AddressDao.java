@@ -9,11 +9,10 @@ public interface AddressDao {
 
     void createAddress(Address address, SessionFactory sessionFactory);
 
-    void update(long id, Address address);
-
-    void deleteById(long id);
 
     Address getAddressById(long id,SessionFactory sessionFactory);
+
+    void update(long id, SessionFactory sessionFactory, Address address);
 
     Set<Address> getAll();
 

@@ -8,7 +8,8 @@ import java.util.Set;
 public interface CompanyDao {
 
 
-    void update(long id, Company company, SessionFactory sessionFactory);
+
+    void update(long id, SessionFactory sessionFactory, Company company);
 
     void update(Company company, SessionFactory sessionFactory);
 

@@ -24,11 +24,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void delete(long id, SessionFactory sessionFactory) {
+
         companyDao.deleteById(id, sessionFactory);
     }
     @Override
-    public void update(Long id, Company company, SessionFactory sessionFactory) {
-
+    public void update(Long id, SessionFactory sessionFactory, Company company) {
+      companyDao.update(id,sessionFactory,company);
     }
 
 
@@ -43,10 +44,6 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
 
-    @Override
-    public void update(Long id, SessionFactory sessionFactory) {
-
-    }
 
 
 

@@ -1,7 +1,6 @@
 package dao.impl;
 
 import dao.CompanyDao;
-import model.Address;
 import model.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,8 +45,15 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     @Override
-    public void update(long id, Company company, SessionFactory sessionFactory) {
-
+    public void update(long id, SessionFactory sessionFactory, Company company) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Company old = getCompanyById(id, sessionFactory);
+        old.setCompanyName(company.getCompanyName());
+        old.setFoundingDate(company.getFoundingDate());
+        session.update(old);
+        session.getTransaction().commit();
+        sessionFactory.close();
     }
 
     @Override

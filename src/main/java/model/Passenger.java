@@ -30,6 +30,12 @@ public class Passenger {
 
     public Passenger() {
     }
+
+    public Passenger(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
+    }
+
     public Address getAddress() {
         return address;
     }

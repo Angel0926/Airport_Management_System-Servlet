@@ -1,16 +1,20 @@
 
 import dao.impl.AddressDaoImpl;
 
-import dao.impl.TripDaoImpl;
+
 import model.*;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import resource.IOimpl.*;
+
 import service.impl.CompanyServiceImpl;
 import service.impl.PassengerServiceImpl;
 import service.impl.TripServiceImpl;
+
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 public class AMSH_app {
@@ -36,10 +40,10 @@ public class AMSH_app {
 //        companyDao.save(company, sessionFactory);
 
         // AddressIOServiceImpl.createAddressFromFile(sessionFactory);
-        PassengerIOServiceImpl.createPassengerFromFile(sessionFactory);
-        CompanyIOServiceImpl.createCompanyFromFile(sessionFactory);
-        TripIOServiceImpl.createPassengerFromFile(sessionFactory);
-        PassInTripIOServiceImpl.createPassInTripFromFile(sessionFactory);
+//        PassengerIOServiceImpl.createPassengerFromFile(sessionFactory);
+//        CompanyIOServiceImpl.createCompanyFromFile(sessionFactory);
+//        TripIOServiceImpl.createPassengerFromFile(sessionFactory);
+//        PassInTripIOServiceImpl.createPassInTripFromFile(sessionFactory);
 
 
 //        System.out.println(addressDao.getAddressById(3, sessionFactory));
@@ -47,9 +51,15 @@ public class AMSH_app {
 //        passengerService.getById(3, sessionFactory);
 //        tripService.getById(1124, sessionFactory);
 
-     //   addressDao.deleteById(6, sessionFactory);
+        //   addressDao.deleteById(6, sessionFactory);
 //companyService.delete(5,sessionFactory);
-   //     passengerService.delete(3,sessionFactory);
+        //     passengerService.delete(3,sessionFactory);
 //tripService.delete(1100,sessionFactory);
+
+
+        //    addressDao.update(2,sessionFactory,new Address("ARMENIA", "YEREVAN"));
+        //   companyService.update(2L, sessionFactory, new Company("aaaa", LocalDate.now(Clock.systemUTC())));
+  //      passengerService.update(2, new Passenger("ddd", "451-236-584"), sessionFactory);
+tripService.update(1101L,new Trip("fff","aaa","bbb", LocalTime.of(20,15,0),LocalTime.of(21,16, 0)),sessionFactory);
     }
 }

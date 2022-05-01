@@ -27,6 +27,12 @@ public class Address {
 
     }
 
+    public Address(String country, String city) {
+        this.id = id;
+        this.country = country;
+        this.city = city;
+    }
+
     public Long getId() {
         return id;
     }

@@ -36,7 +36,7 @@ public class TripServiceImpl implements TripService {
 
     @Override
     public void update(Long id, Trip trip, SessionFactory sessionFactory) {
-        tripDao.update(id, trip);
+        tripDao.update(id, trip,sessionFactory);
     }
 
     @Override
