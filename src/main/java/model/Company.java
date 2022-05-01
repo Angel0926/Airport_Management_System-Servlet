@@ -3,6 +3,8 @@ package model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +18,8 @@ public class Company {
     @Column(name = "founding_date",nullable = false)
     private LocalDate foundingDate;
 
-
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
+    private List<Trip> trips = new ArrayList<>();
 
     public Company() {
 
@@ -78,6 +81,7 @@ public class Company {
                 ", trips=" +
                 '}';
     }
+
 
 
 }

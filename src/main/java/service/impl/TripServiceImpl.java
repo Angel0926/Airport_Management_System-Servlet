@@ -10,15 +10,17 @@ import java.util.Set;
 
 
 public class TripServiceImpl implements TripService {
-  TripDaoImpl tripDao=new TripDaoImpl();
+    TripDaoImpl tripDao = new TripDaoImpl();
+
     @Override
-    public void save(Trip trip, SessionFactory sessionFactory){
-        tripDao.createTrip(trip,sessionFactory);
+    public void save(Trip trip, SessionFactory sessionFactory) {
+
+        tripDao.createTrip(trip, sessionFactory);
     }
 
     @Override
-    public void getById(long id) {
-
+    public void getById(long id, SessionFactory sessionFactory) {
+        System.out.println(tripDao.getTripById(id, sessionFactory));
     }
 
     @Override
@@ -32,16 +34,14 @@ public class TripServiceImpl implements TripService {
     }
 
 
-
-
-@Override
+    @Override
     public void update(Long id, Trip trip, SessionFactory sessionFactory) {
-tripDao.update(id,trip);
+        tripDao.update(id, trip);
     }
 
     @Override
-    public void delete(long tripId) {
-
+    public void delete(long id, SessionFactory sessionFactory) {
+        tripDao.deleteById(id, sessionFactory);
     }
 
     @Override

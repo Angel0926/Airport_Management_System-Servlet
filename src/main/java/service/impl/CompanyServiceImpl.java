@@ -13,13 +13,24 @@ public class CompanyServiceImpl implements CompanyService {
 
 
     @Override
-    public void save(Company company, SessionFactory sessionFactory){
-        companyDao.createCompany(company,sessionFactory);
+    public void save(Company company, SessionFactory sessionFactory) {
+        companyDao.createCompany(company, sessionFactory);
     }
+
     @Override
     public void getById(long id, SessionFactory sessionFactory) {
-companyDao.getCompanyById(2,sessionFactory);
+        System.out.println(companyDao.getCompanyById(id, sessionFactory));
     }
+
+    @Override
+    public void delete(long id, SessionFactory sessionFactory) {
+        companyDao.deleteById(id, sessionFactory);
+    }
+    @Override
+    public void update(Long id, Company company, SessionFactory sessionFactory) {
+
+    }
+
 
     @Override
     public Set<Company> getAll() {
@@ -32,18 +43,12 @@ companyDao.getCompanyById(2,sessionFactory);
     }
 
 
-
-
-
-@Override
-    public void update(Long id,Company company, SessionFactory sessionFactory) {
-companyDao.update(company,sessionFactory);
-    }
-
     @Override
-    public void delete(long companyId) {
+    public void update(Long id, SessionFactory sessionFactory) {
 
     }
+
+
 
 
 }

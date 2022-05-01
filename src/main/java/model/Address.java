@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "address")
+@Table(name = "address", uniqueConstraints =
+@UniqueConstraint(columnNames = {"Country", "City"}))
 public class Address {
 
     @Id
@@ -18,7 +19,7 @@ public class Address {
     @Column(name = "CitY", nullable = false, length = 50)
     private String city;
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address",cascade = CascadeType.ALL)
     private List<Passenger> passengers = new ArrayList<>();
 
 

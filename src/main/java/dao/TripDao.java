@@ -9,11 +9,12 @@ public interface TripDao {
 
     void createTrip(Trip trip, SessionFactory sessionFactory);
 
+    void deleteById(long id, SessionFactory sessionFactory);
+
     void update(long id, Trip trip);
 
-    void deleteById(long id);
 
-    Trip getTripById(long id);
+    Trip getTripById(long id, SessionFactory sessionFactory);
 
     Set<Trip> getAll();
 }

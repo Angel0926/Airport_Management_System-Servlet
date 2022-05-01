@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.CompanyDao;
+import model.Address;
 import model.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +17,33 @@ public class CompanyDaoImpl implements CompanyDao {
         session.getTransaction().commit();
         session.close();
     }
+    @Override
+    public void deleteById(long id,SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Company company = null;
+        company=getCompanyById(id,sessionFactory);
+        session.delete(company);
+        session.getTransaction().commit();
+        session.close();
+    }
 
+    @Override
+    public Company getCompanyById(long id, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        Company company = null;
+        try {
+
+            company= session.get(Company.class, id);
+
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } finally {
+
+            try {if(session != null) session.close();} catch(Exception ex) {}
+        }
+        return company;
+    }
 
     @Override
     public void update(long id, Company company, SessionFactory sessionFactory) {
@@ -28,26 +55,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
     }
 
-    @Override
-    public void deleteById(long id) {
 
-    }
-
-    @Override
-    public Company getCompanyById(long id, SessionFactory sessionFactory) {
-        Session session = sessionFactory.openSession();
-        Company company = null;
-        try {
-            String queryStr = "select emp from Employee emp";
-            company= session.get(Company.class, id);
-
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            try {if(session != null) session.close();} catch(Exception ex) {}
-        }
-        return company;
-    }
 
     @Override
     public Set<Company> getAll() {

@@ -1,9 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "passenger")
@@ -19,6 +17,7 @@ public class Passenger {
     @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "address_passenger_fk"))
     private Address address;
+
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

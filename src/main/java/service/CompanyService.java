@@ -18,6 +18,8 @@ public interface CompanyService {
 
     public void update(Long id,Company company, SessionFactory sessionFactory);
 
-    void delete(long companyId);
+    void update(Long id, SessionFactory sessionFactory);
 
+
+    void delete(long companyId, SessionFactory sessionFactory);
 }

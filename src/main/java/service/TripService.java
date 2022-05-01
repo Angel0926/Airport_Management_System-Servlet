@@ -12,7 +12,8 @@ import java.util.Set;
 public interface TripService {
     void save(Trip trip, SessionFactory sessionFactory);
 
-    void getById(long id);
+
+    void getById(long id, SessionFactory sessionFactory);
 
     void getAll();
 
@@ -21,7 +22,7 @@ public interface TripService {
 
     void update(Long id, Trip trip, SessionFactory sessionFactory);
 
-    void delete(long tripId);
+    void delete(long tripId, SessionFactory sessionFactory);
 
     List<Trip> getTripsFrom(String city);
 

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "trip")
 public class Trip implements Serializable {
@@ -25,9 +26,10 @@ public class Trip implements Serializable {
     @Column(name = "time_in", nullable = false)
     private LocalTime timeIn;
 
-
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "id_company", foreignKey = @ForeignKey(name = "company_trip_fk"))
-    private Long id_company;
+    private Company company;
+
 
     @ManyToMany(mappedBy = "trips")
     private Set<Passenger> passengers = new HashSet<>();
@@ -88,12 +90,13 @@ public class Trip implements Serializable {
         this.timeIn = timeIn;
     }
 
-    public Long getId_company() {
-        return id_company;
+
+    public Company getCompany() {
+        return company;
     }
 
-    public void setId_company(Long id_company) {
-        this.id_company = id_company;
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Set<Passenger> getPassengers() {
@@ -117,12 +120,12 @@ public class Trip implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trip trip = (Trip) o;
-        return id == trip.id && Objects.equals(plane, trip.plane) && Objects.equals(townFrom, trip.townFrom) && Objects.equals(townTo, trip.townTo) && Objects.equals(timeOut, trip.timeOut) && Objects.equals(timeIn, trip.timeIn) && Objects.equals(id_company, trip.id_company) && Objects.equals(passengers, trip.passengers) && Objects.equals(passenger, trip.passenger);
+        return id == trip.id && Objects.equals(plane, trip.plane) && Objects.equals(townFrom, trip.townFrom) && Objects.equals(townTo, trip.townTo) && Objects.equals(timeOut, trip.timeOut) && Objects.equals(timeIn, trip.timeIn) && Objects.equals(company, trip.company) && Objects.equals(passengers, trip.passengers) && Objects.equals(passenger, trip.passenger);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, plane, townFrom, townTo, timeOut, timeIn, id_company, passengers, passenger);
+        return Objects.hash(id, plane, townFrom, townTo, timeOut, timeIn, company, passengers, passenger);
     }
 
     @Override
@@ -134,7 +137,7 @@ public class Trip implements Serializable {
                 ", townTo='" + townTo + '\'' +
                 ", timeOut=" + timeOut +
                 ", timeIn=" + timeIn +
-                ", id_company=" + id_company +
+                ", company=" + company +
                 ", passengers=" + passengers +
                 ", passenger=" + passenger +
                 '}';

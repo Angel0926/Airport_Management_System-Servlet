@@ -1,7 +1,9 @@
 package resource.IOimpl;
 
 
+import dao.impl.CompanyDaoImpl;
 import dao.impl.TripDaoImpl;
+import model.Company;
 import model.Trip;
 import org.hibernate.SessionFactory;
 
@@ -27,10 +29,13 @@ public class TripIOServiceImpl {
                 }
                 line = line.replace("'", "");
                 words = line.split(",");
-
-
+                Company company = null;
                 trip.setId(Long.parseLong(words[0]));
-                trip.setId_company(Long.valueOf(words[1]));
+                CompanyDaoImpl companyDao = new CompanyDaoImpl();
+
+                company=companyDao.getCompanyById(Long.parseLong(words[1]), sessionFactory);
+                trip.setCompany(company);
+
                 trip.setPlane(words[2]);
                 trip.setTownFrom(words[3]);
                 trip.setTownTo(words[4]);
@@ -39,7 +44,7 @@ public class TripIOServiceImpl {
                 trip.setTimeIn(LocalDateTime.parse(words[6],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")).toLocalTime());
 
-              tripDao.createTrip(trip, sessionFactory);
+                tripDao.createTrip(trip, sessionFactory);
                 System.out.println();
             }
         } catch (IOException e) {

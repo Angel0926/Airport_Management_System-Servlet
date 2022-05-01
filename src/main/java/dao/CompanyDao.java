@@ -12,8 +12,9 @@ public interface CompanyDao {
 
     void update(Company company, SessionFactory sessionFactory);
 
-    void deleteById(long id);
 
+
+    void deleteById(long id, SessionFactory sessionFactory);
 
     Company getCompanyById(long id, SessionFactory sessionFactory);
 

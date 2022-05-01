@@ -17,34 +17,22 @@ public class AddressDaoImpl implements AddressDao {
         session.getTransaction().commit();
         session.close();
     }
-
-    @Override
-    public void update(long id, Address address) {
-
-    }
-
-    @Override
-    public void deleteById(long id) {
-
-    }
-
     @Override
     public void deleteById(long id, SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Address address = null;
-
-            String queryStr = "select emp from Employee emp";
-             session.delete(address);
+        address=getAddressById(id,sessionFactory);
+        session.delete(address);
         session.getTransaction().commit();
         session.close();
 
-        }
+    }
 
     @Override
     public Address getAddressById(long id,SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
-       Address address = null;
+        Address address = null;
         try {
             address = session.get(Address.class, id);
 
@@ -55,6 +43,17 @@ public class AddressDaoImpl implements AddressDao {
         }
         return address;
     }
+    @Override
+    public void update(long id, Address address) {
+
+    }
+
+    @Override
+    public void deleteById(long id) {
+
+    }
+
+
 
     @Override
     public Set<Address> getAll() {

@@ -9,17 +9,19 @@ import java.util.Set;
 
 public interface PassengerService {
 
-    void getById(long id);
+
+    void getById(long id, SessionFactory sessionFactory);
+
+    void delete(long id, SessionFactory sessionFactory);
+
+    public void save(Passenger passenger, SessionFactory sessionFactory);
 
     void getAll();
 
     Set<Passenger> get(int offset, int perPage, String sort);
 
-    public void save(Passenger passenger, SessionFactory sessionFactory);
 
     void update(long id, Passenger passenger);
-
-    void delete(long passengerId);
 
     List<Passenger> getPassengersOfTrip(long tripNumber);
 
