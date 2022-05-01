@@ -13,7 +13,9 @@ public interface AddressDao {
 
     void deleteById(long id);
 
-    Address getAddressById(long id);
+    Address getAddressById(long id,SessionFactory sessionFactory);
 
     Set<Address> getAll();
+
+    void deleteById(long id, SessionFactory sessionFactory);
 }

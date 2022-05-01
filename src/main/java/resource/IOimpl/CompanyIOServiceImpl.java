@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class CompanyIOServiceImpl {
-    public static Company createCompanyFromFile(SessionFactory sessionFactory) {
+    public static void createCompanyFromFile(SessionFactory sessionFactory) {
 
         CompanyDaoImpl companyDao = new CompanyDaoImpl();
         Company company = new Company();
@@ -37,7 +37,6 @@ companyDao.createCompany(company, sessionFactory);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-return  company;
     }
 
 }

@@ -19,6 +19,11 @@ public class CompanyDaoImpl implements CompanyDao {
 
 
     @Override
+    public void update(long id, Company company, SessionFactory sessionFactory) {
+
+    }
+
+    @Override
     public void update( Company company, SessionFactory sessionFactory) {
 
     }
@@ -29,9 +34,19 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     @Override
-    public Company getCompanyById(long id) {
+    public Company getCompanyById(long id, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        Company company = null;
+        try {
+            String queryStr = "select emp from Employee emp";
+            company= session.get(Company.class, id);
 
-        return null;
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {if(session != null) session.close();} catch(Exception ex) {}
+        }
+        return company;
     }
 
     @Override

@@ -29,8 +29,31 @@ public class AddressDaoImpl implements AddressDao {
     }
 
     @Override
-    public Address getAddressById(long id) {
-       return  null;
+    public void deleteById(long id, SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Address address = null;
+
+            String queryStr = "select emp from Employee emp";
+             session.delete(address);
+        session.getTransaction().commit();
+        session.close();
+
+        }
+
+    @Override
+    public Address getAddressById(long id,SessionFactory sessionFactory) {
+        Session session = sessionFactory.openSession();
+       Address address = null;
+        try {
+            address = session.get(Address.class, id);
+
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {if(session != null) session.close();} catch(Exception ex) {}
+        }
+        return address;
     }
 
     @Override

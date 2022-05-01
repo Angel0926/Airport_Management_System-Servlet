@@ -1,19 +1,22 @@
 package service;
 
 import model.Company;
+import org.hibernate.SessionFactory;
 
 import java.util.Set;
 
 public interface CompanyService {
-    void getById(long id);
+
+    void getById(long id,SessionFactory sessionFactory);
+
 
     Set<Company> getAll();
 
     Set<Company> get(int offset, int perPage, String sort);
 
-    void save(Company company);
+    public void save(Company company, SessionFactory sessionFactory);
 
-    void update(long id, Company company);
+    public void update(Long id,Company company, SessionFactory sessionFactory);
 
     void delete(long companyId);
 

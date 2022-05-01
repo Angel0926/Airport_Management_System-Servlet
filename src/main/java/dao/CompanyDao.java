@@ -8,13 +8,14 @@ import java.util.Set;
 public interface CompanyDao {
 
 
-   // void update(long id, Company company, SessionFactory sessionFactory);
+    void update(long id, Company company, SessionFactory sessionFactory);
 
     void update(Company company, SessionFactory sessionFactory);
 
     void deleteById(long id);
 
-    Company getCompanyById(long id);
+
+    Company getCompanyById(long id, SessionFactory sessionFactory);
 
     Set<Company> getAll();
 }
