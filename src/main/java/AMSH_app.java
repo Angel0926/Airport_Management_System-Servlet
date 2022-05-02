@@ -8,6 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
+import resource.IOimpl.CompanyIOServiceImpl;
+import resource.IOimpl.PassInTripIOServiceImpl;
+import resource.IOimpl.PassengerIOServiceImpl;
+import resource.IOimpl.TripIOServiceImpl;
 import service.impl.CompanyServiceImpl;
 import service.impl.PassengerServiceImpl;
 import service.impl.TripServiceImpl;
@@ -51,7 +55,7 @@ public class AMSH_app {
 //        passengerService.getById(3, sessionFactory);
 //        tripService.getById(1124, sessionFactory);
 
-        //   addressDao.deleteById(6, sessionFactory);
+    //       addressDao.deleteById(5, sessionFactory);
 //companyService.delete(5,sessionFactory);
         //     passengerService.delete(3,sessionFactory);
 //tripService.delete(1100,sessionFactory);
@@ -59,7 +63,9 @@ public class AMSH_app {
 
         //    addressDao.update(2,sessionFactory,new Address("ARMENIA", "YEREVAN"));
         //   companyService.update(2L, sessionFactory, new Company("aaaa", LocalDate.now(Clock.systemUTC())));
-  //      passengerService.update(2, new Passenger("ddd", "451-236-584"), sessionFactory);
-tripService.update(1101L,new Trip("fff","aaa","bbb", LocalTime.of(20,15,0),LocalTime.of(21,16, 0)),sessionFactory);
+        //      passengerService.update(2, new Passenger("ddd", "451-236-584"), sessionFactory);
+       // tripService.update(1101L, new Trip("fff", "aaa", "bbb", LocalTime.of(20, 15, 0), LocalTime.of(21, 16, 0)), sessionFactory);
+
+
     }
 }

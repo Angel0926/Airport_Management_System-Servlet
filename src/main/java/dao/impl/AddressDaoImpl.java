@@ -6,6 +6,8 @@ import model.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 public class AddressDaoImpl implements AddressDao {
@@ -24,7 +26,7 @@ public class AddressDaoImpl implements AddressDao {
         session.beginTransaction();
         Address address = null;
         address = getAddressById(id, sessionFactory);
-        session.delete(address);
+        session.remove(address);
         session.getTransaction().commit();
         session.close();
 
@@ -61,10 +63,9 @@ public class AddressDaoImpl implements AddressDao {
             sessionFactory.close();
         }
 
-
     @Override
     public Set<Address> getAll() {
-        return null;
-
+        return null ;
     }
+
 }

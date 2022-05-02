@@ -68,8 +68,5 @@ public class PassengerDaoImpl implements PassengerDao {
        return  null;
     }
 
-    public void save(Passenger passenger) {
-
-    }
 }
 

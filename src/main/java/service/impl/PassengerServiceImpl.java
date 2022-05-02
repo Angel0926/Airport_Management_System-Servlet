@@ -34,11 +34,11 @@ public class PassengerServiceImpl implements PassengerService {
     public void update(long id, Passenger passenger, SessionFactory sessionFactory) {
         passengerDao.update(id, passenger, sessionFactory);
     }
-
     @Override
-    public void getAll() {
-
+    public void registerTrip(PassInTrip passInTrip, SessionFactory sessionFactory) {
+        passInTripDao.createPassInTrip(passInTrip, sessionFactory);
     }
+
 
     @Override
     public Set<Passenger> get(int offset, int perPage, String sort) {
@@ -51,11 +51,11 @@ public class PassengerServiceImpl implements PassengerService {
         return null;
     }
 
-    @Override
-    public void registerTrip(PassInTrip passInTrip, SessionFactory sessionFactory) {
-        passInTripDao.createPassInTrip(passInTrip, sessionFactory);
-    }
 
+    @Override
+    public void getAll() {
+
+    }
     @Override
     public void cancelTrip(long passengerId, long tripNumber) {
 

@@ -56,10 +56,6 @@ public class CompanyDaoImpl implements CompanyDao {
         sessionFactory.close();
     }
 
-    @Override
-    public void update( Company company, SessionFactory sessionFactory) {
-
-    }
 
 
 

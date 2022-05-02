@@ -26,7 +26,7 @@ public class Trip implements Serializable {
     @Column(name = "time_in", nullable = false)
     private LocalTime timeIn;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_company", foreignKey = @ForeignKey(name = "company_trip_fk"))
     private Company company;
 
@@ -34,13 +34,13 @@ public class Trip implements Serializable {
     @ManyToMany(mappedBy = "trips")
     private Set<Passenger> passengers = new HashSet<>();
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "Pass_In_Trip",
-            joinColumns = {@JoinColumn(name = "id_psg")},
-            inverseJoinColumns = {@JoinColumn(name = "id_trip")}
-    )
-    private Set<Passenger> passenger = new HashSet<>();
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(
+//            name = "Pass_In_Trip",
+//            joinColumns = {@JoinColumn(name = "id_psg")},
+//            inverseJoinColumns = {@JoinColumn(name = "id_trip")}
+//    )
+//    private Set<Passenger> passenger = new HashSet<>();
 
     public Trip() {
     }
@@ -118,25 +118,25 @@ public class Trip implements Serializable {
         this.passengers = passengers;
     }
 
-    public Set<Passenger> getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Set<Passenger> passenger) {
-        this.passenger = passenger;
-    }
+//    public Set<Passenger> getPassenger() {
+//        return passenger;
+//    }
+//
+//    public void setPassenger(Set<Passenger> passenger) {
+//        this.passenger = passenger;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trip trip = (Trip) o;
-        return id == trip.id && Objects.equals(plane, trip.plane) && Objects.equals(townFrom, trip.townFrom) && Objects.equals(townTo, trip.townTo) && Objects.equals(timeOut, trip.timeOut) && Objects.equals(timeIn, trip.timeIn) && Objects.equals(company, trip.company) && Objects.equals(passengers, trip.passengers) && Objects.equals(passenger, trip.passenger);
+        return id == trip.id && Objects.equals(plane, trip.plane) && Objects.equals(townFrom, trip.townFrom) && Objects.equals(townTo, trip.townTo) && Objects.equals(timeOut, trip.timeOut) && Objects.equals(timeIn, trip.timeIn) && Objects.equals(company, trip.company) && Objects.equals(passengers, trip.passengers) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, plane, townFrom, townTo, timeOut, timeIn, company, passengers, passenger);
+        return Objects.hash(id, plane, townFrom, townTo, timeOut, timeIn, company, passengers);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class Trip implements Serializable {
                 ", timeIn=" + timeIn +
                 ", company=" + company +
                 ", passengers=" + passengers +
-                ", passenger=" + passenger +
+
                 '}';
     }
 }

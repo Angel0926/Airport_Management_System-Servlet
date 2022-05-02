@@ -22,7 +22,15 @@ public class TripServiceImpl implements TripService {
     public void getById(long id, SessionFactory sessionFactory) {
         System.out.println(tripDao.getTripById(id, sessionFactory));
     }
+    @Override
+    public void update(Long id, Trip trip, SessionFactory sessionFactory) {
+        tripDao.update(id, trip,sessionFactory);
+    }
 
+    @Override
+    public void delete(long id, SessionFactory sessionFactory) {
+        tripDao.deleteById(id, sessionFactory);
+    }
     @Override
     public void getAll() {
 
@@ -34,15 +42,7 @@ public class TripServiceImpl implements TripService {
     }
 
 
-    @Override
-    public void update(Long id, Trip trip, SessionFactory sessionFactory) {
-        tripDao.update(id, trip,sessionFactory);
-    }
 
-    @Override
-    public void delete(long id, SessionFactory sessionFactory) {
-        tripDao.deleteById(id, sessionFactory);
-    }
 
     @Override
     public List<Trip> getTripsFrom(String city) {

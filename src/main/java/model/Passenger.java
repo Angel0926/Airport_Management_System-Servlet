@@ -19,7 +19,7 @@ public class Passenger {
     private Address address;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade =  CascadeType.ALL )
     @JoinTable(
             name = "Pass_In_Trip",
             joinColumns = { @JoinColumn(name = "id_psg") },

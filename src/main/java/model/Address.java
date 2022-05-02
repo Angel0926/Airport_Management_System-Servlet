@@ -19,7 +19,7 @@ public class Address {
     @Column(name = "CitY", nullable = false, length = 50)
     private String city;
 
-    @OneToMany(mappedBy = "address",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Passenger> passengers = new ArrayList<>();
 
 
