@@ -6,8 +6,7 @@ import model.Address;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.io.Serializable;
-import java.util.HashSet;
+
 import java.util.Set;
 
 public class AddressDaoImpl implements AddressDao {

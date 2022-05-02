@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.PassengerDao;
 
+import model.Address;
 import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,11 +10,13 @@ import org.hibernate.SessionFactory;
 import java.util.Set;
 
 public class PassengerDaoImpl implements PassengerDao {
-
+AddressDaoImpl a=new AddressDaoImpl();
+Address ad=null;
     @Override
     public void createPassenger(Passenger passenger, SessionFactory sessionFactory) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
+
         session.save(passenger);
         session.getTransaction().commit();
         session.close();

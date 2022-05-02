@@ -8,10 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-import resource.IOimpl.CompanyIOServiceImpl;
-import resource.IOimpl.PassInTripIOServiceImpl;
-import resource.IOimpl.PassengerIOServiceImpl;
-import resource.IOimpl.TripIOServiceImpl;
+import resource.IOimpl.*;
 import service.impl.CompanyServiceImpl;
 import service.impl.PassengerServiceImpl;
 import service.impl.TripServiceImpl;
@@ -43,16 +40,16 @@ public class AMSH_app {
 //        Company company = new Company("ssssdgd", LocalDate.now());
 //        companyDao.save(company, sessionFactory);
 
-        // AddressIOServiceImpl.createAddressFromFile(sessionFactory);
-//        PassengerIOServiceImpl.createPassengerFromFile(sessionFactory);
-//        CompanyIOServiceImpl.createCompanyFromFile(sessionFactory);
-//        TripIOServiceImpl.createPassengerFromFile(sessionFactory);
-//        PassInTripIOServiceImpl.createPassInTripFromFile(sessionFactory);
+      //  AddressIOServiceImpl.input(AddressIOServiceImpl.createAddressFromFile(sessionFactory),sessionFactory);
+        PassengerIOServiceImpl.createPassengerFromFile(sessionFactory);
+        CompanyIOServiceImpl.createCompanyFromFile(sessionFactory);
+        TripIOServiceImpl.createPassengerFromFile(sessionFactory);
+        PassInTripIOServiceImpl.createPassInTripFromFile(sessionFactory);
 
 
 //        System.out.println(addressDao.getAddressById(3, sessionFactory));
 //        companyService.getById(3, sessionFactory);
-//        passengerService.getById(3, sessionFactory);
+//     passengerService.getById(3, sessionFactory);
 //        tripService.getById(1124, sessionFactory);
 
     //       addressDao.deleteById(5, sessionFactory);

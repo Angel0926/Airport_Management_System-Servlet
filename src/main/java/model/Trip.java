@@ -34,13 +34,6 @@ public class Trip implements Serializable {
     @ManyToMany(mappedBy = "trips")
     private Set<Passenger> passengers = new HashSet<>();
 
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "Pass_In_Trip",
-//            joinColumns = {@JoinColumn(name = "id_psg")},
-//            inverseJoinColumns = {@JoinColumn(name = "id_trip")}
-//    )
-//    private Set<Passenger> passenger = new HashSet<>();
 
     public Trip() {
     }
