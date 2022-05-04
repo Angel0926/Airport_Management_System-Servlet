@@ -5,5 +5,5 @@ import model.Passenger;
 import org.hibernate.SessionFactory;
 
 public interface PassInTripDao {
-    void createPassInTrip(PassInTrip passInTrip, SessionFactory sessionFactory);
+    void createPassInTrip(PassInTrip passInTrip);
 }

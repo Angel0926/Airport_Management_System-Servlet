@@ -15,11 +15,17 @@ import java.util.Set;
 
 
 public class PassengerIOServiceImpl {
+    private  SessionFactory sessionFactory;
 
-    public static void createPassengerFromFile(SessionFactory sessionFactory) {
-Set<Address> setadd=AddressIOServiceImpl.createAddressFromFile(sessionFactory);
+    public PassengerIOServiceImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public  void createPassengerFromFile() {
+        AddressIOServiceImpl addressIOService=new AddressIOServiceImpl(sessionFactory);
+        Set<Address> setadd = addressIOService.createAddressFromFile();
         Passenger passenger = new Passenger();
-        PassengerDaoImpl passengerDao = new PassengerDaoImpl();
+        PassengerDaoImpl passengerDao = new PassengerDaoImpl(sessionFactory);
         File file = new File("src/main/java/resource/passengers.txt");
         String line;
         String[] words;
@@ -38,10 +44,7 @@ Set<Address> setadd=AddressIOServiceImpl.createAddressFromFile(sessionFactory);
             if (line.contains("'")) {
                 line = line.replace("'", "՛");
             }
-            AddressDao addressDao=new AddressDaoImpl();
-
-
-
+            AddressDao addressDao = new AddressDaoImpl();
 
 
             words = line.split(",");
@@ -49,20 +52,18 @@ Set<Address> setadd=AddressIOServiceImpl.createAddressFromFile(sessionFactory);
                 System.out.print(words[i] + " ");
                 passenger.setName(words[0]);
                 passenger.setPhone(words[1]);
+
                 Address address = new Address();
                 address.setCountry(words[2]);
                 address.setCity(words[3]);
                 for (Address address1 : setadd) {
-                    if(address1.equals(address)){
+                    if (address1.equals(address)) {
                         passenger.setAddress(address1);
-                        passengerDao.createPassenger(passenger, sessionFactory);
+                        passengerDao.createPassenger(passenger);
                         break;
                     }
                 }
-
             }
-
-
         }
         try {
             System.out.println();

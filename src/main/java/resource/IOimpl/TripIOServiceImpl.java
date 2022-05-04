@@ -13,13 +13,18 @@ import java.time.format.DateTimeFormatter;
 
 
 public class TripIOServiceImpl {
+    private  SessionFactory sessionFactory;
 
-    public static void createPassengerFromFile(SessionFactory sessionFactory) {
-        TripDaoImpl tripDao = new TripDaoImpl();
+    public TripIOServiceImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void createPassengerFromFile() {
+        TripDaoImpl tripDao = new TripDaoImpl(sessionFactory);
         Trip trip = new Trip();
         String[] words;
         String line;
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/resource/trip"))
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/resource/trip.txt"))
         ) {
             while (true) {
                 try {
@@ -31,9 +36,9 @@ public class TripIOServiceImpl {
                 words = line.split(",");
                 Company company = null;
                 trip.setId(Long.parseLong(words[0]));
-                CompanyDaoImpl companyDao = new CompanyDaoImpl();
+                CompanyDaoImpl companyDao = new CompanyDaoImpl(sessionFactory);
 
-                company=companyDao.getCompanyById(Long.parseLong(words[1]), sessionFactory);
+                company=companyDao.getCompanyById(Long.parseLong(words[1]));
                 trip.setCompany(company);
 
                 trip.setPlane(words[2]);
@@ -44,7 +49,7 @@ public class TripIOServiceImpl {
                 trip.setTimeIn(LocalDateTime.parse(words[6],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")).toLocalTime());
 
-                tripDao.createTrip(trip, sessionFactory);
+                tripDao.createTrip(trip);
                 System.out.println();
             }
         } catch (IOException e) {

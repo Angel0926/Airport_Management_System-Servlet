@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.Set;
 
 public interface TripService {
-    void save(Trip trip, SessionFactory sessionFactory);
+    void save(Trip trip);
 
 
-    void getById(long id, SessionFactory sessionFactory);
+    void getById(long id);
 
     void getAll();
 
     Set<Trip> get(int offset, int perPage, String sort);
 
 
-    void update(Long id, Trip trip, SessionFactory sessionFactory);
+    void update(Long id, Trip trip);
 
-    void delete(long tripId, SessionFactory sessionFactory);
+    void delete(long tripId);
 
     List<Trip> getTripsFrom(String city);
 

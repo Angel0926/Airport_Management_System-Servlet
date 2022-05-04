@@ -17,7 +17,7 @@ public class Address {
     @Column(name = "CitY", nullable = false, length = 50)
     private String city;
 
-    @OneToMany(mappedBy = "address",cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "address",cascade = {CascadeType.PERSIST, CascadeType.ALL})
     private Set<Passenger> passengers = new HashSet<>();
 
 

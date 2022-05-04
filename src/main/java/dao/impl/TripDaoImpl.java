@@ -11,17 +11,22 @@ import java.util.Set;
 
 
 public class TripDaoImpl implements TripDao {
-    @Override
-    public void createTrip(Trip trip, SessionFactory sessionFactory) {
+    private  SessionFactory sessionFactory;
+
+    public TripDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void createTrip(Trip trip) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(trip);
+        session.persist(trip);
         session.getTransaction().commit();
         session.close();
     }
 
-    @Override
-    public Trip getTripById(long id,SessionFactory sessionFactory) {
+
+    public Trip getTripById(long id) {
         Session session = sessionFactory.openSession();
         Trip trip = null;
         try {
@@ -37,21 +42,21 @@ public class TripDaoImpl implements TripDao {
         return trip;
     }
 
-    @Override
-    public void deleteById(long id,SessionFactory sessionFactory) {
+
+    public void deleteById(long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
        Trip trip = null;
-        trip=getTripById(id,sessionFactory);
+        trip=getTripById(id);
         session.delete(trip);
         session.getTransaction().commit();
         session.close();
     }
-    @Override
-    public void update(long id, Trip trip, SessionFactory sessionFactory) {
+
+    public void update(long id, Trip trip) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-       Trip old = getTripById(id, sessionFactory);
+       Trip old = getTripById(id);
         old.setPlane(trip.getPlane());
         old.setTownFrom(trip.getTownFrom());
         old.setTownTo(trip.getTownTo());

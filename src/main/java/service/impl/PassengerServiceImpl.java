@@ -12,31 +12,37 @@ import java.util.Set;
 
 
 public class PassengerServiceImpl implements PassengerService {
-    PassengerDaoImpl passengerDao = new PassengerDaoImpl();
-    PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl();
+
+    private  SessionFactory sessionFactory;
+
+    public PassengerServiceImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+    PassengerDaoImpl passengerDao = new PassengerDaoImpl(sessionFactory);
+    PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl(sessionFactory);
+    @Override
+    public void save(Passenger passenger) {
+        passengerDao.createPassenger(passenger);
+    }
+
 
     @Override
-    public void save(Passenger passenger, SessionFactory sessionFactory) {
-        passengerDao.createPassenger(passenger, sessionFactory);
+    public void getById(long id) {
+        System.out.println(passengerDao.getPassengerById(id));
     }
 
     @Override
-    public void getById(long id, SessionFactory sessionFactory) {
-        System.out.println(passengerDao.getPassengerById(id, sessionFactory));
+    public void delete(long id) {
+        passengerDao.deleteById(id);
     }
 
     @Override
-    public void delete(long id, SessionFactory sessionFactory) {
-        passengerDao.deleteById(id, sessionFactory);
-    }
-
-    @Override
-    public void update(long id, Passenger passenger, SessionFactory sessionFactory) {
-        passengerDao.update(id, passenger, sessionFactory);
+    public void update(long id, Passenger passenger) {
+        passengerDao.update(id, passenger);
     }
     @Override
-    public void registerTrip(PassInTrip passInTrip, SessionFactory sessionFactory) {
-        passInTripDao.createPassInTrip(passInTrip, sessionFactory);
+    public void registerTrip(PassInTrip passInTrip) {
+        passInTripDao.createPassInTrip(passInTrip);
     }
 
 

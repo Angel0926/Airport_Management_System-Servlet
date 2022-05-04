@@ -14,13 +14,20 @@ import java.time.format.DateTimeFormatter;
 
 
 public class PassInTripIOServiceImpl {
+    private  SessionFactory sessionFactory;
 
-    public static void createPassInTripFromFile(SessionFactory sessionFactory) {
-        PassInTripDao passInTripDao = new PassInTripDaoImpl();
+    public PassInTripIOServiceImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+
+    public  void createPassInTripFromFile() {
+        PassInTripDao passInTripDao = new PassInTripDaoImpl(sessionFactory);
+
         PassInTrip passInTrip = new PassInTrip();
         String[] words;
         String line;
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/resource/pass_in_trip"))
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/resource/pass_in_trip.txt"))
         ) {
             while (true) {
                 try {
@@ -35,7 +42,7 @@ public class PassInTripIOServiceImpl {
                 passInTrip.setDate(LocalDate.parse(words[2],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")));
                 passInTrip.setPlace(words[3]);
-                passInTripDao.createPassInTrip(passInTrip, sessionFactory);
+                passInTripDao.createPassInTrip(passInTrip);
                 System.out.println();
             }
         } catch (IOException e) {

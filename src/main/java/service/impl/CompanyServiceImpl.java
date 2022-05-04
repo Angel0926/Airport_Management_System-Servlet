@@ -9,27 +9,32 @@ import java.util.Set;
 
 
 public class CompanyServiceImpl implements CompanyService {
-    CompanyDaoImpl companyDao = new CompanyDaoImpl();
+
+    private  SessionFactory sessionFactory;
 
 
+    public CompanyServiceImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+    CompanyDaoImpl companyDao=new CompanyDaoImpl(sessionFactory);
     @Override
-    public void save(Company company, SessionFactory sessionFactory) {
-        companyDao.createCompany(company, sessionFactory);
+    public void save(Company company) {
+        companyDao.createCompany(company);
     }
 
     @Override
-    public void getById(long id, SessionFactory sessionFactory) {
-        System.out.println(companyDao.getCompanyById(id, sessionFactory));
+    public void getById(long id) {
+        System.out.println(companyDao.getCompanyById(id));
     }
 
     @Override
-    public void delete(long id, SessionFactory sessionFactory) {
+    public void delete(long id) {
 
-        companyDao.deleteById(id, sessionFactory);
+        companyDao.deleteById(id);
     }
     @Override
-    public void update(Long id, SessionFactory sessionFactory, Company company) {
-      companyDao.update(id,sessionFactory,company);
+    public void update(Long id,  Company company) {
+      companyDao.update(id,company);
     }
 
 

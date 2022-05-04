@@ -7,12 +7,12 @@ import java.util.Set;
 
 public interface PassengerDao {
 
-    void createPassenger(Passenger passenger, SessionFactory sessionFactory);
+    void createPassenger(Passenger passenger);
 
-    void deleteById(long id, SessionFactory sessionFactory);
-    Passenger getPassengerById(long id, SessionFactory sessionFactory);
+    void deleteById(long id);
+    Passenger getPassengerById(long id);
 
-    void update(long id, Passenger passenger, SessionFactory sessionFactory);
+    void update(long id, Passenger passenger);
 
     Set<Passenger> getAll();
 }

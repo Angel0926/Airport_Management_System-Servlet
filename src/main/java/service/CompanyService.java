@@ -7,18 +7,18 @@ import java.util.Set;
 
 public interface CompanyService {
 
-    void getById(long id,SessionFactory sessionFactory);
+    void getById(long id);
 
 
-    void update(Long id, SessionFactory sessionFactory, Company company);
+    void update(Long id, Company company);
 
     Set<Company> getAll();
 
     Set<Company> get(int offset, int perPage, String sort);
 
-    public void save(Company company, SessionFactory sessionFactory);
+    public void save(Company company);
 
 
 
-    void delete(long companyId, SessionFactory sessionFactory);
+    void delete(long companyId);
 }

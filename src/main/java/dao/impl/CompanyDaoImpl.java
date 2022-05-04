@@ -5,30 +5,37 @@ import model.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.Set;
 
 public class CompanyDaoImpl implements CompanyDao {
+    private  SessionFactory sessionFactory;
 
-    public void createCompany(Company company, SessionFactory sessionFactory) {
-        Session session = sessionFactory.openSession();
+    public CompanyDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void createCompany(Company company) {
+        Session session;
+        session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(company);
+        session.persist(company);
         session.getTransaction().commit();
         session.close();
     }
     @Override
-    public void deleteById(long id,SessionFactory sessionFactory) {
+    public void deleteById(long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Company company = null;
-        company=getCompanyById(id,sessionFactory);
+        company=getCompanyById(id);
         session.delete(company);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public Company getCompanyById(long id, SessionFactory sessionFactory) {
+    public Company getCompanyById(long id) {
         Session session = sessionFactory.openSession();
         Company company = null;
         try {
@@ -44,11 +51,13 @@ public class CompanyDaoImpl implements CompanyDao {
         return company;
     }
 
+
+
     @Override
-    public void update(long id, SessionFactory sessionFactory, Company company) {
+    public void update(long id, Company company) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Company old = getCompanyById(id, sessionFactory);
+        Company old = getCompanyById(id);
         old.setCompanyName(company.getCompanyName());
         old.setFoundingDate(company.getFoundingDate());
         session.update(old);
@@ -59,8 +68,9 @@ public class CompanyDaoImpl implements CompanyDao {
 
 
 
-    @Override
+
     public Set<Company> getAll() {
-        return null;
+
+   return null;
     }
 }

@@ -12,9 +12,13 @@ import java.util.Set;
 
 
 public class AddressIOServiceImpl {
-    static AddressDaoImpl addressDao = new AddressDaoImpl();
+    private  SessionFactory sessionFactory;
 
-    public static Set<Address> createAddressFromFile(SessionFactory sessionFactory) {
+    public AddressIOServiceImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public  Set<Address> createAddressFromFile() {
 
         Set<Address> add1 = null;
         Address address = null;
@@ -35,7 +39,6 @@ public class AddressIOServiceImpl {
                 address.setCountry(words[2]);
                 address.setCity(words[3]);
 
-
                 add1.add(address);
 
 
@@ -45,11 +48,5 @@ public class AddressIOServiceImpl {
             throw new RuntimeException(e);
         }
         return add1;
-    }
-
-    public static void input(Set<Address> addset, SessionFactory s) {
-        for (Address address : addset) {
-            addressDao.createAddress(address, s);
-        }
     }
 }

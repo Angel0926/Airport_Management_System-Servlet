@@ -7,14 +7,14 @@ import java.util.Set;
 
 public interface TripDao {
 
-    void createTrip(Trip trip, SessionFactory sessionFactory);
+    void createTrip(Trip trip);
 
-    void deleteById(long id, SessionFactory sessionFactory);
+    void deleteById(long id);
 
 
-    Trip getTripById(long id, SessionFactory sessionFactory);
+    Trip getTripById(long id);
 
-    void update(long id, Trip trip, SessionFactory sessionFactory);
+    void update(long id, Trip trip);
 
     Set<Trip> getAll();
 }

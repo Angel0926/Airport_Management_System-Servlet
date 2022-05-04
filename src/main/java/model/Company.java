@@ -18,7 +18,7 @@ public class Company {
     @Column(name = "founding_date",nullable = false)
     private LocalDate foundingDate;
 
-    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company",cascade = CascadeType.PERSIST)
     private List<Trip> trips = new ArrayList<>();
 
     public Company() {

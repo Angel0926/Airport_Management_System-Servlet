@@ -10,13 +10,14 @@ import java.util.Set;
 public interface PassengerService {
 
 
-    void getById(long id, SessionFactory sessionFactory);
 
-    void delete(long id, SessionFactory sessionFactory);
+    void getById(long id);
 
-    public void save(Passenger passenger, SessionFactory sessionFactory);
+    void delete(long id);
 
-    void update(long id, Passenger passenger, SessionFactory sessionFactory);
+    public void save(Passenger passenger);
+
+    void update(long id, Passenger passenger);
 
     void getAll();
 
@@ -26,7 +27,7 @@ public interface PassengerService {
     List<Passenger> getPassengersOfTrip(long tripNumber);
 
 
-    void registerTrip(PassInTrip passInTrip, SessionFactory sessionFactory);
+    void registerTrip(PassInTrip passInTrip);
 
     void cancelTrip(long passengerId, long tripNumber);
 }

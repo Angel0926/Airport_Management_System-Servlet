@@ -7,14 +7,15 @@ import java.util.Set;
 
 public interface AddressDao {
 
-    void createAddress(Address address, SessionFactory sessionFactory);
+    void createAddress(Address address);
 
 
-    Address getAddressById(long id,SessionFactory sessionFactory);
+    Address getAddressById(long id);
 
-    void update(long id, SessionFactory sessionFactory, Address address);
+    void update(long id, Address address);
+
+
+    void deleteById(long id);
 
     Set<Address> getAll();
-
-    void deleteById(long id, SessionFactory sessionFactory);
 }

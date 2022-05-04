@@ -8,11 +8,16 @@ import org.hibernate.SessionFactory;
 
 
 public class PassInTripDaoImpl implements PassInTripDao {
-    @Override
-    public void createPassInTrip(PassInTrip passInTrip, SessionFactory sessionFactory) {
+    private SessionFactory sessionFactory;
+
+    public PassInTripDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public void createPassInTrip(PassInTrip passInTrip) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(passInTrip);
+        session.persist(passInTrip);
         session.getTransaction().commit();
         session.close();
     }
