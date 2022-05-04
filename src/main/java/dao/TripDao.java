@@ -1,9 +1,8 @@
 package dao;
 
 import model.Trip;
-import org.hibernate.SessionFactory;
 
-import java.util.Set;
+import java.util.List;
 
 public interface TripDao {
 
@@ -16,5 +15,5 @@ public interface TripDao {
 
     void update(long id, Trip trip);
 
-    Set<Trip> getAll();
+    List<Trip> getAll();
 }

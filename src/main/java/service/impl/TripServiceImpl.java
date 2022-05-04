@@ -11,12 +11,14 @@ import java.util.Set;
 
 public class TripServiceImpl implements TripService {
 
-    private  SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
+    private TripDaoImpl tripDao;
 
-    public TripServiceImpl(SessionFactory sessionFactory) {
+    public TripServiceImpl(SessionFactory sessionFactory, TripDaoImpl tripDao) {
         this.sessionFactory = sessionFactory;
+        this.tripDao = tripDao;
     }
-    TripDaoImpl tripDao = new TripDaoImpl(sessionFactory);
+
     @Override
     public void save(Trip trip) {
 
@@ -27,6 +29,7 @@ public class TripServiceImpl implements TripService {
     public void getById(long id) {
         System.out.println(tripDao.getTripById(id));
     }
+
     @Override
     public void update(Long id, Trip trip) {
         tripDao.update(id, trip);
@@ -36,17 +39,16 @@ public class TripServiceImpl implements TripService {
     public void delete(long id) {
         tripDao.deleteById(id);
     }
+
     @Override
     public void getAll() {
-
+        tripDao.getAll();
     }
 
     @Override
     public Set<Trip> get(int offset, int perPage, String sort) {
         return null;
     }
-
-
 
 
     @Override

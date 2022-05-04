@@ -78,10 +78,7 @@ public class Company {
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
                 ", foundingDate=" + foundingDate +
-                ", trips=" +
+              //  ", trips=" + trips +
                 '}';
     }
-
-
-
 }

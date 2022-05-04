@@ -1,9 +1,8 @@
 package dao;
 
 import model.Passenger;
-import org.hibernate.SessionFactory;
 
-import java.util.Set;
+import java.util.List;
 
 public interface PassengerDao {
 
@@ -14,5 +13,5 @@ public interface PassengerDao {
 
     void update(long id, Passenger passenger);
 
-    Set<Passenger> getAll();
+    List<Passenger> getAll();
 }

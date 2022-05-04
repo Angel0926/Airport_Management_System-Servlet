@@ -16,16 +16,19 @@ import java.util.Set;
 
 public class PassengerIOServiceImpl {
     private  SessionFactory sessionFactory;
+    private AddressIOServiceImpl addressIOService;
+    private  PassengerDaoImpl passengerDao;
 
-    public PassengerIOServiceImpl(SessionFactory sessionFactory) {
+    public PassengerIOServiceImpl(SessionFactory sessionFactory, AddressIOServiceImpl addressIOService, PassengerDaoImpl passengerDao) {
         this.sessionFactory = sessionFactory;
+        this.addressIOService = addressIOService;
+        this.passengerDao = passengerDao;
     }
 
     public  void createPassengerFromFile() {
-        AddressIOServiceImpl addressIOService=new AddressIOServiceImpl(sessionFactory);
+
         Set<Address> setadd = addressIOService.createAddressFromFile();
         Passenger passenger = new Passenger();
-        PassengerDaoImpl passengerDao = new PassengerDaoImpl(sessionFactory);
         File file = new File("src/main/java/resource/passengers.txt");
         String line;
         String[] words;
@@ -44,7 +47,7 @@ public class PassengerIOServiceImpl {
             if (line.contains("'")) {
                 line = line.replace("'", "՛");
             }
-            AddressDao addressDao = new AddressDaoImpl();
+       //     AddressDao addressDao = new AddressDaoImpl();
 
 
             words = line.split(",");

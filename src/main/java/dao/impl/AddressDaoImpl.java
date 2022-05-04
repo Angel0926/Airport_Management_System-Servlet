@@ -3,8 +3,10 @@ package dao.impl;
 import dao.AddressDao;
 import model.Address;
 
+import model.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import resource.IOimpl.AddressIOServiceImpl;
 
 
@@ -17,11 +19,11 @@ public class AddressDaoImpl implements AddressDao {
     public AddressDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-    AddressIOServiceImpl addressIOService=new AddressIOServiceImpl(sessionFactory);
+
     public AddressDaoImpl() {
     }
-
     public void createAddress(Address address) {
+
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.persist(address);
@@ -33,12 +35,11 @@ public class AddressDaoImpl implements AddressDao {
     public void deleteById(long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Address address = null;
-        address = getAddressById(id);
+        Address address= null;
+        address=getAddressById(id);
         session.remove(address);
         session.getTransaction().commit();
         session.close();
-
     }
 
     @Override
@@ -67,13 +68,15 @@ public class AddressDaoImpl implements AddressDao {
         Address old = getAddressById(id);
         old.setCountry(address.getCountry());
         old.setCity(address.getCity());
-        session.update(old);
+        session.merge(old);
         session.getTransaction().commit();
-        sessionFactory.close();
+        session.close();
     }
 
     @Override
     public Set<Address> getAll() {
+        AddressIOServiceImpl addressIOService=new AddressIOServiceImpl(sessionFactory);
+
         return addressIOService.createAddressFromFile();
     }
 }

@@ -1,18 +1,18 @@
 
-import dao.impl.AddressDaoImpl;
+import dao.PassengerDao;
+import dao.impl.*;
 import model.*;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import resource.IOimpl.CompanyIOServiceImpl;
-import resource.IOimpl.PassInTripIOServiceImpl;
-import resource.IOimpl.PassengerIOServiceImpl;
-import resource.IOimpl.TripIOServiceImpl;
+import resource.IOimpl.*;
 import service.impl.CompanyServiceImpl;
 import service.impl.PassengerServiceImpl;
 import service.impl.TripServiceImpl;
 
+import java.time.Clock;
+import java.time.LocalDate;
 
 
 public class AMSH_app {
@@ -30,46 +30,48 @@ public class AMSH_app {
         SessionFactory sessionFactory = configuration.buildSessionFactory();
 
 
-        AddressDaoImpl addressDao = new AddressDaoImpl();
-        CompanyServiceImpl companyService = new CompanyServiceImpl(sessionFactory);
-        PassengerServiceImpl passengerService = new PassengerServiceImpl(sessionFactory);
-        TripServiceImpl tripService = new TripServiceImpl(sessionFactory);
+        AddressDaoImpl addressDao = new AddressDaoImpl(sessionFactory);
+        CompanyDaoImpl companyDao=new CompanyDaoImpl(sessionFactory);
+        PassengerDaoImpl passengerDao=new PassengerDaoImpl(sessionFactory);
+        TripDaoImpl tripDao=new TripDaoImpl(sessionFactory);
+        PassInTripDaoImpl passInTripDao=new PassInTripDaoImpl(sessionFactory);
+
+        CompanyServiceImpl companyService = new CompanyServiceImpl(sessionFactory,companyDao);
+        PassengerServiceImpl passengerService = new PassengerServiceImpl(sessionFactory,passengerDao,passInTripDao);
+        TripServiceImpl tripService = new TripServiceImpl(sessionFactory,tripDao);
+
+        AddressIOServiceImpl addressIOService=new AddressIOServiceImpl(sessionFactory);
+//      addressIOService.createAddressFromFile();
+        PassengerIOServiceImpl passengerIOService = new PassengerIOServiceImpl(sessionFactory,addressIOService,passengerDao);
+       // passengerIOService.createPassengerFromFile();
+        CompanyIOServiceImpl companyIOService = new CompanyIOServiceImpl(sessionFactory);
+        //companyIOService.createCompanyFromFile();
+        TripIOServiceImpl tripIOService = new TripIOServiceImpl(sessionFactory,companyDao);
+        //tripIOService.createPassengerFromFile();
+        PassInTripIOServiceImpl passInTripIOService = new PassInTripIOServiceImpl(sessionFactory);
+      //passInTripIOService.createPassInTripFromFile();
 
 
 
+//System.out.println(addressDao.getAddressById(3));
+        // companyService.getById(3);
+        // passengerService.getById(3);
+       // tripService.getById(1124);
 
-//        Company company = new Company("ssssdgd", LocalDate.now());
-//        companyDao.save(company, sessionFactory);
-//
-//        AddressIOServiceImpl.input(AddressIOServiceImpl.createAddressFromFile(sessionFactory),sessionFactory);
-        PassengerIOServiceImpl passengerIOService=new PassengerIOServiceImpl(sessionFactory);
-        passengerIOService.createPassengerFromFile();
-        CompanyIOServiceImpl companyIOService=new CompanyIOServiceImpl(sessionFactory);
-        companyIOService.createCompanyFromFile();
-        TripIOServiceImpl tripIOService=new TripIOServiceImpl(sessionFactory);
-        tripIOService.createPassengerFromFile();
-        PassInTripIOServiceImpl passInTripIOService=new PassInTripIOServiceImpl(sessionFactory);
-       passInTripIOService.createPassInTripFromFile();
+ //addressDao.deleteById(4);
+   //  companyService.delete(12);
+ //     passengerService.delete(4);
+//tripService.delete(1100);
 
 
+         // addressDao.update(5,new Address("ARMENIAN", "YEREVAN"));
+         //  companyService.update(2L, new Company("bbbba", LocalDate.now(Clock.systemUTC())));
+        //  passengerService.update(8, new Passenger("ddkd", "4561-236-584"));
+        // tripService.update(1101L, new Trip("fff", "aaa", "bbb", LocalTime.of(20, 15, 0), LocalTime.of(21, 16, 0)));
 
-//    System.out.println(addressDao.getAddressById(3, sessionFactory));
-     // companyService.getById(3, sessionFactory);
- // passengerService.getById(3, sessionFactory);
-
-//        tripService.getById(1124, sessionFactory);
-
-    //     addressDao.deleteById(5, sessionFactory);
-//companyService.delete(7,sessionFactory);
-        //     passengerService.delete(3,sessionFactory);
-//tripService.delete(1100,sessionFactory);
-
-
-        //    addressDao.update(2,sessionFactory,new Address("ARMENIA", "YEREVAN"));
-      //   companyService.update(2L, sessionFactory, new Company("bbbba", LocalDate.now(Clock.systemUTC())));
-        //      passengerService.update(2, new Passenger("ddd", "451-236-584"), sessionFactory);
-       // tripService.update(1101L, new Trip("fff", "aaa", "bbb", LocalTime.of(20, 15, 0), LocalTime.of(21, 16, 0)), sessionFactory);
-
-       // System.out.println(addressDao.getAll());
+        // System.out.println(addressDao.getAll());
+       // System.out.println(companyDao.getAll());
+       // System.out.println(passengerDao.getAll());
+       // System.out.println(tripDao.getAll());
     }
 }

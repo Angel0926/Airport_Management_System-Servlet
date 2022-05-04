@@ -7,7 +7,7 @@ import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.util.Set;
+import java.util.List;
 
 public class PassengerDaoImpl implements PassengerDao {
     private SessionFactory sessionFactory;
@@ -19,6 +19,7 @@ public class PassengerDaoImpl implements PassengerDao {
     AddressDaoImpl a = new AddressDaoImpl();
     Address ad = null;
 
+    @Override
     public void createPassenger(Passenger passenger) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -67,15 +68,18 @@ public class PassengerDaoImpl implements PassengerDao {
         Passenger old = getPassengerById(id);
         old.setPhone(passenger.getPhone());
         old.setName(passenger.getName());
-        session.update(old);
+        session.merge(old);
         session.getTransaction().commit();
-        sessionFactory.close();
+        session.close();
     }
 
 
     @Override
-    public Set<Passenger> getAll() {
-        return null;
+    public List<Passenger> getAll() {
+
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        return  session.createQuery("SELECT p FROM Passenger p", Passenger.class).getResultList();
     }
 
 }

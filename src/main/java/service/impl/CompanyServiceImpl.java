@@ -11,12 +11,13 @@ import java.util.Set;
 public class CompanyServiceImpl implements CompanyService {
 
     private  SessionFactory sessionFactory;
+    private final CompanyDaoImpl companyDao;
 
-
-    public CompanyServiceImpl(SessionFactory sessionFactory) {
+    public CompanyServiceImpl(SessionFactory sessionFactory, CompanyDaoImpl companyDao) {
         this.sessionFactory = sessionFactory;
+        this.companyDao = companyDao;
     }
-    CompanyDaoImpl companyDao=new CompanyDaoImpl(sessionFactory);
+
     @Override
     public void save(Company company) {
         companyDao.createCompany(company);
@@ -39,8 +40,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 
     @Override
-    public Set<Company> getAll() {
-        return null;
+    public void getAll() {
+       companyDao.getAll();
     }
 
     @Override

@@ -141,8 +141,8 @@ public class Trip implements Serializable {
                 ", townTo='" + townTo + '\'' +
                 ", timeOut=" + timeOut +
                 ", timeIn=" + timeIn +
-                ", company=" + company +
-                ", passengers=" + passengers +
+             //   ", company=" + company +
+               // ", passengers=" + passengers +
 
                 '}';
     }

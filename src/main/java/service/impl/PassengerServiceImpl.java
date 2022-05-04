@@ -14,12 +14,15 @@ import java.util.Set;
 public class PassengerServiceImpl implements PassengerService {
 
     private  SessionFactory sessionFactory;
+    private PassengerDaoImpl passengerDao;
+    private PassInTripDaoImpl passInTripDao;
 
-    public PassengerServiceImpl(SessionFactory sessionFactory) {
+    public PassengerServiceImpl(SessionFactory sessionFactory, PassengerDaoImpl passengerDao, PassInTripDaoImpl passInTripDao) {
         this.sessionFactory = sessionFactory;
+        this.passengerDao = passengerDao;
+        this.passInTripDao = passInTripDao;
     }
-    PassengerDaoImpl passengerDao = new PassengerDaoImpl(sessionFactory);
-    PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl(sessionFactory);
+
     @Override
     public void save(Passenger passenger) {
         passengerDao.createPassenger(passenger);
@@ -45,7 +48,10 @@ public class PassengerServiceImpl implements PassengerService {
         passInTripDao.createPassInTrip(passInTrip);
     }
 
-
+    @Override
+    public void getAll() {
+        passengerDao.getAll();
+    }
     @Override
     public Set<Passenger> get(int offset, int perPage, String sort) {
         return null;
@@ -58,10 +64,7 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
 
-    @Override
-    public void getAll() {
 
-    }
     @Override
     public void cancelTrip(long passengerId, long tripNumber) {
 

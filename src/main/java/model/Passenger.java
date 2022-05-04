@@ -14,8 +14,7 @@ public class Passenger {
     @Column(name = "phone",nullable = false,unique = true,length = 50)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY
-            , cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "address_passenger_fk"))
     private Address address;
 
@@ -87,7 +86,7 @@ public class Passenger {
     public String toString() {
         return "Passenger{" +
                 "id=" + id +
-                ", idAddress=" +
+              //  ", idAddress=" +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 "}\n";

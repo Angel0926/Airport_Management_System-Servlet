@@ -5,16 +5,16 @@ import model.Company;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.criteria.CriteriaQuery;
-import java.util.Set;
+import java.util.List;
 
 public class CompanyDaoImpl implements CompanyDao {
-    private  SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     public CompanyDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    @Override
     public void createCompany(Company company) {
         Session session;
         session = sessionFactory.openSession();
@@ -23,12 +23,13 @@ public class CompanyDaoImpl implements CompanyDao {
         session.getTransaction().commit();
         session.close();
     }
+
     @Override
     public void deleteById(long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Company company = null;
-        company=getCompanyById(id);
+        company = getCompanyById(id);
         session.delete(company);
         session.getTransaction().commit();
         session.close();
@@ -37,20 +38,14 @@ public class CompanyDaoImpl implements CompanyDao {
     @Override
     public Company getCompanyById(long id) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
         Company company = null;
-        try {
+        company = session.get(Company.class, id);
 
-            company= session.get(Company.class, id);
-
-        } catch(Exception ex) {
-            ex.printStackTrace();
-        } finally {
-
-            try {if(session != null) session.close();} catch(Exception ex) {}
-        }
+        session.getTransaction().commit();
+        session.close();
         return company;
     }
-
 
 
     @Override
@@ -62,15 +57,14 @@ public class CompanyDaoImpl implements CompanyDao {
         old.setFoundingDate(company.getFoundingDate());
         session.update(old);
         session.getTransaction().commit();
-        sessionFactory.close();
+        session.close();
     }
 
+    @Override
+    public List<Company> getAll() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        return  session.createQuery("SELECT c FROM Company c", Company.class).getResultList();
 
-
-
-
-    public Set<Company> getAll() {
-
-   return null;
     }
 }

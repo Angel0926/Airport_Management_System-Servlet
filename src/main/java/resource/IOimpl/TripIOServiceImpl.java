@@ -13,10 +13,13 @@ import java.time.format.DateTimeFormatter;
 
 
 public class TripIOServiceImpl {
-    private  SessionFactory sessionFactory;
 
-    public TripIOServiceImpl(SessionFactory sessionFactory) {
+    private  SessionFactory sessionFactory;
+    private  CompanyDaoImpl companyDao;
+
+    public TripIOServiceImpl(SessionFactory sessionFactory, CompanyDaoImpl companyDao) {
         this.sessionFactory = sessionFactory;
+        this.companyDao = companyDao;
     }
 
     public void createPassengerFromFile() {
@@ -36,7 +39,7 @@ public class TripIOServiceImpl {
                 words = line.split(",");
                 Company company = null;
                 trip.setId(Long.parseLong(words[0]));
-                CompanyDaoImpl companyDao = new CompanyDaoImpl(sessionFactory);
+
 
                 company=companyDao.getCompanyById(Long.parseLong(words[1]));
                 trip.setCompany(company);
