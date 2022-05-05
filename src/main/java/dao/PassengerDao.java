@@ -8,6 +8,8 @@ public interface PassengerDao {
 
     void createPassenger(Passenger passenger);
 
+    List<Passenger> get(int offset, int perPage, String sort);
+
     void deleteById(long id);
     Passenger getPassengerById(long id);
 

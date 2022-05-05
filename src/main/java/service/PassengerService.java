@@ -2,10 +2,8 @@ package service;
 
 import model.PassInTrip;
 import model.Passenger;
-import org.hibernate.SessionFactory;
 
 import java.util.List;
-import java.util.Set;
 
 public interface PassengerService {
 
@@ -21,7 +19,7 @@ public interface PassengerService {
 
     void getAll();
 
-    Set<Passenger> get(int offset, int perPage, String sort);
+    void get(int offset, int perPage, String sort);
 
 
     List<Passenger> getPassengersOfTrip(long tripNumber);

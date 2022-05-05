@@ -1,17 +1,19 @@
 package service.impl;
 
 import dao.impl.TripDaoImpl;
+import model.Company;
 import model.Trip;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import service.TripService;
 
 import java.util.List;
-import java.util.Set;
 
 
 public class TripServiceImpl implements TripService {
 
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
     private TripDaoImpl tripDao;
 
     public TripServiceImpl(SessionFactory sessionFactory, TripDaoImpl tripDao) {
@@ -46,19 +48,41 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public Set<Trip> get(int offset, int perPage, String sort) {
-        return null;
+    public List<Trip> get(int offset, int perPage, String sort) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Trip> trips=null;
+        Query query=session.createQuery("select t from Trip  t order by :SORT").setParameter("SORT",sort).
+                setMaxResults(perPage).setFirstResult(offset);
+
+        trips= query.getResultList();
+        session.close();
+        return trips;
     }
 
 
     @Override
-    public List<Trip> getTripsFrom(String city) {
-        return null;
+    public List getTripsFrom(String city) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Trip> trips=null;
+        Query query=session.createQuery("select t from Trip  t where townFrom=:TOWNFROM").
+                setParameter("TOWNFROM",city);
+        trips= query.getResultList();
+        session.close();
+        return trips;
     }
 
     @Override
     public List<Trip> getTripsTo(String city) {
-        return null;
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Trip> trips=null;
+        Query query=session.createQuery("select t from Trip  t where townTo=:TOWNTO").
+                setParameter("TOWNTO",city);
+        trips= query.getResultList();
+        session.close();
+        return trips;
     }
 
 

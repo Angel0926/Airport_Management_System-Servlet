@@ -2,10 +2,13 @@ package service.impl;
 
 import dao.impl.CompanyDaoImpl;
 import model.Company;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import service.CompanyService;
 
-import java.util.Set;
+import java.util.List;
 
 
 public class CompanyServiceImpl implements CompanyService {
@@ -45,8 +48,17 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Set<Company> get(int offset, int perPage, String sort) {
-        return null;
+    public List<Company> get(int offset, int perPage, String sort) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Company> companies=null;
+        Query query=session.createQuery("select c from Company c order by :SORT").setParameter("SORT",sort).
+                setMaxResults(perPage).setFirstResult(offset);
+
+        companies= query.getResultList();
+        session.close();
+        return companies;
+
     }
 
 

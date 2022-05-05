@@ -6,6 +6,7 @@ import model.Address;
 import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -47,6 +48,20 @@ public class PassengerDaoImpl implements PassengerDao {
             System.out.println(passenger);
         }
         return passenger;
+    }
+
+
+    @Override
+    public List<Passenger> get(int offset, int perPage, String sort) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Passenger> passengers=null;
+        Query query=session.createQuery("select p from Passenger p order by :SORT").setParameter("SORT",sort).
+       setMaxResults(perPage).setFirstResult(offset);
+
+        passengers= query.getResultList();
+        session.close();
+        return passengers;
     }
 
 

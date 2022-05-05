@@ -2,7 +2,7 @@ package service;
 
 import model.Company;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CompanyService {
 
@@ -14,7 +14,7 @@ public interface CompanyService {
 
     void getAll();
 
-    Set<Company> get(int offset, int perPage, String sort);
+    List<Company> get(int offset, int perPage, String sort);
 
     public void save(Company company);
 
