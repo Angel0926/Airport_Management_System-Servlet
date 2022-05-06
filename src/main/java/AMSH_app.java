@@ -74,7 +74,7 @@ Trip trip=new Trip();
         // System.out.println(tripService.getTripsFrom("Paris"));
         // System.out.println(tripService.getTripsTo("Paris"));
         // System.out.println(passengerDao.get(4, 6, "name"));
-        for (Company company: new CompanyServiceImpl(sessionFactory,companyDao).get(2, 10, "foundingDate")){
+        for (Company company: new CompanyServiceImpl(sessionFactory,companyDao).get(2, 10, "companyName")){
             System.out.println(company);
         }
 //        System.out.println(companyService.get(2, 3, "founding_date"));

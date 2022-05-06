@@ -52,7 +52,7 @@ public class TripServiceImpl implements TripService {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<Trip> trips=null;
-        Query query=session.createQuery("select t from Trip  t order by :SORT").setParameter("SORT",sort).
+        Query query=session.createQuery("select t from Trip  t order by t." + sort + " DESC").
                 setMaxResults(perPage).setFirstResult(offset);
 
         trips= query.getResultList();

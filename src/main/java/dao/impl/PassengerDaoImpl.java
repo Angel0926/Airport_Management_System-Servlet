@@ -56,7 +56,8 @@ public class PassengerDaoImpl implements PassengerDao {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<Passenger> passengers=null;
-        Query query=session.createQuery("select p from Passenger p order by :SORT").setParameter("SORT",sort).
+        String sql="select p from Passenger p order by p." + sort + " DESC";
+        Query query=session.createQuery(sql).
        setMaxResults(perPage).setFirstResult(offset);
 
         passengers= query.getResultList();
