@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class AddressDaoImpl implements AddressDao {
 
-    private  SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public AddressDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -22,6 +22,7 @@ public class AddressDaoImpl implements AddressDao {
 
     public AddressDaoImpl() {
     }
+
     public void createAddress(Address address) {
 
         Session session = sessionFactory.openSession();
@@ -35,8 +36,8 @@ public class AddressDaoImpl implements AddressDao {
     public void deleteById(long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Address address= null;
-        address=getAddressById(id);
+        Address address = null;
+        address = getAddressById(id);
         session.remove(address);
         session.getTransaction().commit();
         session.close();
@@ -75,7 +76,7 @@ public class AddressDaoImpl implements AddressDao {
 
     @Override
     public Set<Address> getAll() {
-        AddressIOServiceImpl addressIOService=new AddressIOServiceImpl(sessionFactory);
+        AddressIOServiceImpl addressIOService = new AddressIOServiceImpl(sessionFactory);
 
         return addressIOService.createAddressFromFile();
     }

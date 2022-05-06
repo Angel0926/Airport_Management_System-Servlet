@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CompanyServiceImpl implements CompanyService {
 
-    private  SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
     private final CompanyDaoImpl companyDao;
 
     public CompanyServiceImpl(SessionFactory sessionFactory, CompanyDaoImpl companyDao) {
@@ -36,34 +36,31 @@ public class CompanyServiceImpl implements CompanyService {
 
         companyDao.deleteById(id);
     }
+
     @Override
-    public void update(Long id,  Company company) {
-      companyDao.update(id,company);
+    public void update(Long id, Company company) {
+        companyDao.update(id, company);
     }
 
 
     @Override
     public void getAll() {
-       companyDao.getAll();
+        companyDao.getAll();
     }
 
     @Override
     public List<Company> get(int offset, int perPage, String sort) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<Company> companies=null;
-        Query query=session.createQuery("select c from Company c order by :SORT").setParameter("SORT",sort).
+        List<Company> companies = null;
+        String sql = "SELECT c FROM Company c ORDER BY c." + sort + " DESC";
+        Query query = session.createQuery(sql).
                 setMaxResults(perPage).setFirstResult(offset);
-
-        companies= query.getResultList();
+        companies = query.getResultList();
         session.close();
         return companies;
 
     }
-
-
-
-
 
 
 }

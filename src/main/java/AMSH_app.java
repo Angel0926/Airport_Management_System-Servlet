@@ -74,11 +74,14 @@ Trip trip=new Trip();
         // System.out.println(tripService.getTripsFrom("Paris"));
         // System.out.println(tripService.getTripsTo("Paris"));
         // System.out.println(passengerDao.get(4, 6, "name"));
-        // System.out.println(companyService.get(2, 3, "founding_date"));
+        for (Company company: new CompanyServiceImpl(sessionFactory,companyDao).get(2, 10, "foundingDate")){
+            System.out.println(company);
+        }
+//        System.out.println(companyService.get(2, 3, "founding_date"));
         // System.out.println(tripService.get(2, 3, "plane"));
 
 
      //passengerService.cancelTrip(3,1145);
-        System.out.println(passengerService.getPassengersOfTrip(1145));
+      //  System.out.println(passengerService.getPassengersOfTrip(1145));
     }
 }
