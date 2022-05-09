@@ -8,9 +8,9 @@ public interface TripService {
     void save(Trip trip);
 
 
-    void getById(long id);
+    Trip getById(long id);
 
-    void getAll();
+    List<Trip> getAll();
 
     List<Trip> get(int offset, int perPage, String sort);
 

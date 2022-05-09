@@ -28,15 +28,7 @@ public class TripImplServiceTest implements Serializable {
     }
 
     @Test
-    public Trip testCreate(Trip trip) {
-        System.out.println("Running");
-        session.beginTransaction();
-        trip=new Trip("au365","paris","london", LocalTime.MAX,LocalTime.MIN);
-        session.getTransaction().commit();
-        return (Trip) session.save(trip);
-
-
-
+    public void testCreate(Trip trip) {
     }
 
     @Test

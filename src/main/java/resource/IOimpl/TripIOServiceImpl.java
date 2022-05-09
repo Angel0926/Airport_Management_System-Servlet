@@ -6,6 +6,9 @@ import dao.impl.TripDaoImpl;
 import model.Company;
 import model.Trip;
 import org.hibernate.SessionFactory;
+import service.CompanyService;
+import service.impl.CompanyServiceImpl;
+import service.impl.TripServiceImpl;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -14,16 +17,12 @@ import java.time.format.DateTimeFormatter;
 
 public class TripIOServiceImpl {
 
-    private  SessionFactory sessionFactory;
-    private  CompanyDaoImpl companyDao;
 
-    public TripIOServiceImpl(SessionFactory sessionFactory, CompanyDaoImpl companyDao) {
-        this.sessionFactory = sessionFactory;
-        this.companyDao = companyDao;
-    }
+    private final TripServiceImpl tripService = new TripServiceImpl();
+    private final CompanyServiceImpl companyService = new CompanyServiceImpl();
 
     public void createPassengerFromFile() {
-        TripDaoImpl tripDao = new TripDaoImpl(sessionFactory);
+
         Trip trip = new Trip();
         String[] words;
         String line;
@@ -41,7 +40,7 @@ public class TripIOServiceImpl {
                 trip.setId(Long.parseLong(words[0]));
 
 
-                company=companyDao.getCompanyById(Long.parseLong(words[1]));
+                company = companyService.getById(Long.parseLong(words[1]));
                 trip.setCompany(company);
 
                 trip.setPlane(words[2]);
@@ -52,7 +51,7 @@ public class TripIOServiceImpl {
                 trip.setTimeIn(LocalDateTime.parse(words[6],
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")).toLocalTime());
 
-                tripDao.createTrip(trip);
+                tripService.save(trip);
                 System.out.println();
             }
         } catch (IOException e) {

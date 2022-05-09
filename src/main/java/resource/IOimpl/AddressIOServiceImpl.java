@@ -12,11 +12,7 @@ import java.util.Set;
 
 
 public class AddressIOServiceImpl {
-    private  SessionFactory sessionFactory;
 
-    public AddressIOServiceImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     public  Set<Address> createAddressFromFile() {
 

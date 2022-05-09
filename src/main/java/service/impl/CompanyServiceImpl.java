@@ -1,11 +1,9 @@
 package service.impl;
 
+import config.HibernateConfigUtil;
 import dao.impl.CompanyDaoImpl;
 import model.Company;
-
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import service.CompanyService;
 
 import java.util.List;
@@ -13,13 +11,8 @@ import java.util.List;
 
 public class CompanyServiceImpl implements CompanyService {
 
-    private SessionFactory sessionFactory;
-    private final CompanyDaoImpl companyDao;
+    private final CompanyDaoImpl companyDao = new CompanyDaoImpl();
 
-    public CompanyServiceImpl(SessionFactory sessionFactory, CompanyDaoImpl companyDao) {
-        this.sessionFactory = sessionFactory;
-        this.companyDao = companyDao;
-    }
 
     @Override
     public void save(Company company) {
@@ -27,13 +20,14 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void getById(long id) {
-        System.out.println(companyDao.getCompanyById(id));
+    public Company getById(long id) {
+        Company companyById = companyDao.getCompanyById(id);
+        System.out.println(companyById);
+        return companyById;
     }
 
     @Override
     public void delete(long id) {
-
         companyDao.deleteById(id);
     }
 
@@ -44,21 +38,13 @@ public class CompanyServiceImpl implements CompanyService {
 
 
     @Override
-    public void getAll() {
-        companyDao.getAll();
+    public List<Company> getAll() {
+        return companyDao.getAll();
     }
 
     @Override
     public List<Company> get(int offset, int perPage, String sort) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Company> companies = null;
-        String sql = "SELECT c FROM Company c ORDER BY c." + sort + " DESC";
-        Query query = session.createQuery(sql).
-                setMaxResults(perPage).setFirstResult(offset);
-        companies = query.getResultList();
-        session.close();
-        return companies;
+        return companyDao.get(offset,perPage,sort);
 
     }
 

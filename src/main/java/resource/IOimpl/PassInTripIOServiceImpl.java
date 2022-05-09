@@ -1,6 +1,7 @@
 package resource.IOimpl;
 
 
+import config.HibernateConfigUtil;
 import dao.PassInTripDao;
 import dao.impl.PassInTripDaoImpl;
 import model.PassInTrip;
@@ -14,16 +15,12 @@ import java.time.format.DateTimeFormatter;
 
 
 public class PassInTripIOServiceImpl {
-    private  SessionFactory sessionFactory;
 
-    public PassInTripIOServiceImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private final PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl();
 
 
-    public  void createPassInTripFromFile() {
-        PassInTripDao passInTripDao = new PassInTripDaoImpl(sessionFactory);
 
+    public void createPassInTripFromFile() {
         PassInTrip passInTrip = new PassInTrip();
         String[] words;
         String line;

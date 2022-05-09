@@ -1,21 +1,20 @@
 package dao.impl;
 
+import config.HibernateConfigUtil;
 import dao.TripDao;
 
 import model.Company;
 import model.Trip;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
 
 public class TripDaoImpl implements TripDao {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory = HibernateConfigUtil.getSessionFactory();
 
-    public TripDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Override
     public void createTrip(Trip trip) {
@@ -69,5 +68,39 @@ public class TripDaoImpl implements TripDao {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         return  session.createQuery("SELECT t FROM Trip t", Trip.class).getResultList();
+    }
+
+    public List<Trip> get(int offset, int perPage, String sort) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Trip> trips=null;
+        Query query=session.createQuery("select t from Trip  t order by t." + sort + " DESC").
+                setMaxResults(perPage).setFirstResult(offset);
+
+        trips= query.getResultList();
+        session.close();
+        return trips;
+    }
+
+    public List<Trip> getTripsFrom(String city) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Trip> trips=null;
+        Query query=session.createQuery("select t from Trip  t where townFrom=:TOWNFROM").
+                setParameter("TOWNFROM",city);
+        trips= query.getResultList();
+        session.close();
+        return trips;
+    }
+
+    public List<Trip> getTripsTo(String city) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Trip> trips=null;
+        Query query=session.createQuery("select t from Trip  t where townTo=:TOWNTO").
+                setParameter("TOWNTO",city);
+        trips= query.getResultList();
+        session.close();
+        return trips;
     }
 }

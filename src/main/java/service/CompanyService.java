@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface CompanyService {
 
-    void getById(long id);
+    Company getById(long id);
 
     void delete(long id);
 
     void update(Long id, Company company);
 
-    void getAll();
+    List<Company> getAll();
 
     List<Company> get(int offset, int perPage, String sort);
 

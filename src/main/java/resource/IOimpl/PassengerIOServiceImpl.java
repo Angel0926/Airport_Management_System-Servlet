@@ -8,6 +8,7 @@ import dao.impl.PassengerDaoImpl;
 import model.Address;
 import model.Passenger;
 import org.hibernate.SessionFactory;
+import service.impl.PassengerServiceImpl;
 
 import java.io.*;
 import java.util.HashSet;
@@ -15,15 +16,11 @@ import java.util.Set;
 
 
 public class PassengerIOServiceImpl {
-    private  SessionFactory sessionFactory;
-    private AddressIOServiceImpl addressIOService;
-    private  PassengerDaoImpl passengerDao;
+    private final AddressIOServiceImpl addressIOService = new AddressIOServiceImpl();
+    private final PassengerServiceImpl passengerService = new PassengerServiceImpl();
 
-    public PassengerIOServiceImpl(SessionFactory sessionFactory, AddressIOServiceImpl addressIOService, PassengerDaoImpl passengerDao) {
-        this.sessionFactory = sessionFactory;
-        this.addressIOService = addressIOService;
-        this.passengerDao = passengerDao;
-    }
+    private final AddressDaoImpl addressDao = new AddressDaoImpl();
+
 
     public  void createPassengerFromFile() {
 
@@ -47,7 +44,6 @@ public class PassengerIOServiceImpl {
             if (line.contains("'")) {
                 line = line.replace("'", "՛");
             }
-       //     AddressDao addressDao = new AddressDaoImpl();
 
 
             words = line.split(",");
@@ -59,10 +55,11 @@ public class PassengerIOServiceImpl {
                 Address address = new Address();
                 address.setCountry(words[2]);
                 address.setCity(words[3]);
+
                 for (Address address1 : setadd) {
                     if (address1.equals(address)) {
                         passenger.setAddress(address1);
-                        passengerDao.createPassenger(passenger);
+                        passengerService.save(passenger);
                         break;
                     }
                 }

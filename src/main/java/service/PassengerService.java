@@ -9,7 +9,7 @@ public interface PassengerService {
 
 
 
-    void getById(long id);
+    Passenger getById(long id);
 
     void delete(long id);
 
@@ -17,9 +17,9 @@ public interface PassengerService {
 
     void update(long id, Passenger passenger);
 
-    void getAll();
+    List<Passenger> getAll();
 
-    void get(int offset, int perPage, String sort);
+    List<Passenger> get(int offset, int perPage, String sort);
 
 
     List<Passenger> getPassengersOfTrip(long tripNumber);

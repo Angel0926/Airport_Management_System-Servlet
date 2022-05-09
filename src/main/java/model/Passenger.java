@@ -14,7 +14,7 @@ public class Passenger {
     @Column(name = "phone",nullable = false,unique = true,length = 50)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "address_passenger_fk"))
     private Address address;
 

@@ -1,5 +1,6 @@
 package service.impl;
 
+import config.HibernateConfigUtil;
 import dao.impl.PassInTripDaoImpl;
 import dao.impl.PassengerDaoImpl;
 import model.PassInTrip;
@@ -18,19 +19,9 @@ import java.util.Set;
 
 public class PassengerServiceImpl implements PassengerService {
 
-    private SessionFactory sessionFactory;
-    private PassengerDaoImpl passengerDao;
-    private PassInTripDaoImpl passInTripDao;
-    private Trip trip;
+    private final PassengerDaoImpl passengerDao = new PassengerDaoImpl();
+    private final PassInTripDaoImpl passInTripDao = new PassInTripDaoImpl();
 
-    public PassengerServiceImpl(SessionFactory sessionFactory,
-                                PassengerDaoImpl passengerDao,
-                                PassInTripDaoImpl passInTripDao, Trip trip) {
-        this.sessionFactory = sessionFactory;
-        this.passengerDao = passengerDao;
-        this.passInTripDao = passInTripDao;
-        this.trip = trip;
-    }
 
     @Override
     public void save(Passenger passenger) {
@@ -39,8 +30,10 @@ public class PassengerServiceImpl implements PassengerService {
 
 
     @Override
-    public void getById(long id) {
-        System.out.println(passengerDao.getPassengerById(id));
+    public Passenger getById(long id) {
+        Passenger passengerById = passengerDao.getPassengerById(id);
+        System.out.println(passengerById);
+        return passengerById;
     }
 
     @Override
@@ -59,39 +52,26 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
-    public void getAll() {
-        passengerDao.getAll();
+    public List<Passenger> getAll() {
+        return passengerDao.getAll();
     }
 
     @Override
-    public void get(int offset, int perPage, String sort) {
-        passengerDao.get(offset, perPage, sort);
+    public List<Passenger> get(int offset, int perPage, String sort) {
+        return passengerDao.get(offset, perPage, sort);
     }
 
 
     @Override
     public List<Passenger> getPassengersOfTrip(long tripNumber) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Passenger> passengers = null;
-        Query query = session.createQuery("Select p from Passenger p join PassInTrip pit on p.id=pit.psgId   " +
-                " WHERE pit.tripId = :TRIPID").setParameter("TRIPID",tripNumber);
-
-        passengers=query.getResultList();
-
-        return passengers;
+       return passengerDao.getPassengerOfTrip(tripNumber);
 
     }
 
 
     @Override
     public void cancelTrip(long passengerId, long tripNumber) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("delete from PassInTrip  where psgId=:ID and tripId=:TID").
-                setParameter("ID", passengerId).setParameter("TID", tripNumber);
-        query.executeUpdate();
-        session.close();
+        passengerDao.cancelTrip(passengerId,tripNumber);
 
     }
 

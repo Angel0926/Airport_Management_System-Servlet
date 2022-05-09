@@ -1,5 +1,6 @@
 package dao.impl;
 
+import config.HibernateConfigUtil;
 import dao.PassengerDao;
 
 import model.Address;
@@ -11,14 +12,8 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class PassengerDaoImpl implements PassengerDao {
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory = HibernateConfigUtil.getSessionFactory();
 
-    public PassengerDaoImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    AddressDaoImpl a = new AddressDaoImpl();
-    Address ad = null;
 
     @Override
     public void createPassenger(Passenger passenger) {
@@ -98,5 +93,25 @@ public class PassengerDaoImpl implements PassengerDao {
         return  session.createQuery("SELECT p FROM Passenger p", Passenger.class).getResultList();
     }
 
+    public List<Passenger> getPassengerOfTrip(long tripNumber) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<Passenger> passengers = null;
+        Query query = session.createQuery("Select p from Passenger p join PassInTrip pit on p.id=pit.psgId   " +
+                " WHERE pit.tripId = :TRIPID").setParameter("TRIPID",tripNumber);
+
+        passengers=query.getResultList();
+
+        return passengers;
+    }
+
+    public void cancelTrip(long passengerId, long tripNumber) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query query = session.createQuery("delete from PassInTrip  where psgId=:ID and tripId=:TID").
+                setParameter("ID", passengerId).setParameter("TID", tripNumber);
+        query.executeUpdate();
+        session.close();
+    }
 }
 

@@ -1,8 +1,11 @@
 package resource.IOimpl;
 
+import config.HibernateConfigUtil;
 import dao.impl.CompanyDaoImpl;
 import model.Company;
 import org.hibernate.SessionFactory;
+import service.CompanyService;
+import service.impl.CompanyServiceImpl;
 
 import javax.persistence.EntityManager;
 import java.io.BufferedReader;
@@ -15,15 +18,11 @@ import java.time.format.DateTimeFormatter;
 
 public class CompanyIOServiceImpl {
 
-    private  SessionFactory sessionFactory;
 
-
-    public CompanyIOServiceImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private final CompanyServiceImpl companyService = new CompanyServiceImpl();
    
     public  void createCompanyFromFile() {
-        CompanyDaoImpl companyDao=new CompanyDaoImpl(sessionFactory);
+
         String[] words;
         String line;
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/resource/companies.txt"))
@@ -41,7 +40,7 @@ public class CompanyIOServiceImpl {
                 company.setCompanyName(words[0]);
                 company.setFoundingDate(LocalDate.parse(words[1], DateTimeFormatter.ofPattern("M/d/yyyy")));
 
-                companyDao.createCompany(company);
+                companyService.save(company);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -13,13 +13,9 @@ import java.util.List;
 
 public class TripServiceImpl implements TripService {
 
-    private final SessionFactory sessionFactory;
-    private TripDaoImpl tripDao;
 
-    public TripServiceImpl(SessionFactory sessionFactory, TripDaoImpl tripDao) {
-        this.sessionFactory = sessionFactory;
-        this.tripDao = tripDao;
-    }
+    private final TripDaoImpl tripDao = new TripDaoImpl();
+
 
     @Override
     public void save(Trip trip) {
@@ -28,8 +24,10 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void getById(long id) {
-        System.out.println(tripDao.getTripById(id));
+    public Trip getById(long id) {
+        Trip tripById = tripDao.getTripById(id);
+        System.out.println(tripById);
+        return tripById;
     }
 
     @Override
@@ -43,46 +41,24 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void getAll() {
-        tripDao.getAll();
+    public List<Trip> getAll() {
+        return tripDao.getAll();
     }
 
     @Override
     public List<Trip> get(int offset, int perPage, String sort) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Trip> trips=null;
-        Query query=session.createQuery("select t from Trip  t order by t." + sort + " DESC").
-                setMaxResults(perPage).setFirstResult(offset);
-
-        trips= query.getResultList();
-        session.close();
-        return trips;
+        return tripDao.get(offset, perPage, sort);
     }
 
 
     @Override
-    public List getTripsFrom(String city) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Trip> trips=null;
-        Query query=session.createQuery("select t from Trip  t where townFrom=:TOWNFROM").
-                setParameter("TOWNFROM",city);
-        trips= query.getResultList();
-        session.close();
-        return trips;
+    public List<Trip> getTripsFrom(String city) {
+        return tripDao.getTripsFrom(city);
     }
 
     @Override
     public List<Trip> getTripsTo(String city) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Trip> trips=null;
-        Query query=session.createQuery("select t from Trip  t where townTo=:TOWNTO").
-                setParameter("TOWNTO",city);
-        trips= query.getResultList();
-        session.close();
-        return trips;
+        return tripDao.getTripsTo(city);
     }
 
 
