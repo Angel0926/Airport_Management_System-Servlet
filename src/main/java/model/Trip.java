@@ -26,7 +26,7 @@ public class Trip implements Serializable {
     @Column(name = "time_in", nullable = false)
     private LocalTime timeIn;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_company", foreignKey = @ForeignKey(name = "company_trip_fk"))
     private Company company;
 
@@ -44,6 +44,15 @@ public class Trip implements Serializable {
         this.townTo = townTo;
         this.timeOut = timeOut;
         this.timeIn = timeIn;
+    }
+
+    public Trip(String plane, String townFrom, String townTo, LocalTime timeOut, LocalTime timeIn, Company company) {
+        this.plane = plane;
+        this.townFrom = townFrom;
+        this.townTo = townTo;
+        this.timeOut = timeOut;
+        this.timeIn = timeIn;
+        this.company = company;
     }
 
     public long getId() {

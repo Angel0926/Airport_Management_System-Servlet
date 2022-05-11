@@ -1,11 +1,8 @@
 package resource.IOimpl;
 
 
-import config.HibernateConfigUtil;
-import dao.PassInTripDao;
 import dao.impl.PassInTripDaoImpl;
 import model.PassInTrip;
-import org.hibernate.SessionFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

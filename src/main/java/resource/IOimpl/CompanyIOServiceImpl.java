@@ -1,13 +1,8 @@
 package resource.IOimpl;
 
-import config.HibernateConfigUtil;
-import dao.impl.CompanyDaoImpl;
 import model.Company;
-import org.hibernate.SessionFactory;
-import service.CompanyService;
 import service.impl.CompanyServiceImpl;
 
-import javax.persistence.EntityManager;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

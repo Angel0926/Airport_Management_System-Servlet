@@ -33,17 +33,18 @@ public class AMSH_app {
 //
 //        addressIOService.createAddressFromFile();
 
-        passengerIOService.createPassengerFromFile();
-
-        companyIOService.createCompanyFromFile();
-
-        tripIOService.createPassengerFromFile();
-
-        passInTripIOService.createPassInTripFromFile();
+//        passengerIOService.createPassengerFromFile();
+//
+//        companyIOService.createCompanyFromFile();
+//
+//        tripIOService.createPassengerFromFile();
+//
+//        passInTripIOService.createPassInTripFromFile();
 
 //
 //        System.out.println(addressDao.getAddressById(3));
 //        companyService.getById(3);
+
 //        passengerService.getById(3);
 //        tripService.getById(1124);
 //
@@ -56,7 +57,7 @@ public class AMSH_app {
 //        addressDao.update(5, new Address("ARMENIAN", "YEREVAN"));
 //        companyService.update(2L, new Company("bbbba", LocalDate.now(Clock.systemUTC())));
 //        passengerService.update(8, new Passenger("ddkd", "4561-236-584"));
-//        tripService.update(1101L, new Trip("fff", "aaa", "bbb", LocalTime.of(20, 15, 0), LocalTime.of(21, 16, 0)));
+//      tripService.update(1101L, new Trip("fff", "aaa", "bbb", LocalTime.of(20, 15, 0), LocalTime.of(21, 16, 0)));
 //
 //        System.out.println(addressDao.getAll());
 //        System.out.println(companyService.getAll());

@@ -1,9 +1,8 @@
 package dao.impl;
 
-import config.HibernateConfigUtil;
+import config.SessionFactoryUtil;
 import dao.PassengerDao;
 
-import model.Address;
 import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +11,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class PassengerDaoImpl implements PassengerDao {
-    private final SessionFactory sessionFactory = HibernateConfigUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 
 
     @Override

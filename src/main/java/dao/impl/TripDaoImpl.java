@@ -1,9 +1,8 @@
 package dao.impl;
 
-import config.HibernateConfigUtil;
+import config.SessionFactoryUtil;
 import dao.TripDao;
 
-import model.Company;
 import model.Trip;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,14 +12,14 @@ import java.util.List;
 
 
 public class TripDaoImpl implements TripDao {
-    private final SessionFactory sessionFactory = HibernateConfigUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 
 
     @Override
     public void createTrip(Trip trip) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.persist(trip);
+        session.save(trip);
         session.getTransaction().commit();
         session.close();
     }
@@ -29,8 +28,7 @@ public class TripDaoImpl implements TripDao {
     public Trip getTripById(long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Trip trip = null;
-        trip = session.get(Trip.class, id);
+        Trip trip = session.get(Trip.class, id);
         session.getTransaction().commit();
         session.close();
         return trip;
@@ -51,13 +49,17 @@ public class TripDaoImpl implements TripDao {
     public void update(long id, Trip trip) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Trip old = getTripById(id);
-        old.setPlane(trip.getPlane());
-        old.setTownFrom(trip.getTownFrom());
-        old.setTownTo(trip.getTownTo());
-        old.setTimeIn(trip.getTimeIn());
-        old.setTimeOut(trip.getTimeOut());
-        session.update(old);
+        String hql = "UPDATE Trip T SET  T.plane = :plane," +
+                " T.townFrom = :townFrom, T.townTo = :townTo," +
+                "T.timeOut = :timeOut, T.timeIn = :timeIn WHERE id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id",id);
+        query.setParameter("plane",trip.getPlane());
+        query.setParameter("townFrom",trip.getTownFrom());
+        query.setParameter("townTo",trip.getTownTo());
+        query.setParameter("timeOut",trip.getTimeOut());
+        query.setParameter("timeIn",trip.getTimeIn());
+        query.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }

@@ -1,20 +1,12 @@
 package service.impl;
 
-import config.HibernateConfigUtil;
 import dao.impl.PassInTripDaoImpl;
 import dao.impl.PassengerDaoImpl;
 import model.PassInTrip;
 import model.Passenger;
-import model.Trip;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import service.PassengerService;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class PassengerServiceImpl implements PassengerService {

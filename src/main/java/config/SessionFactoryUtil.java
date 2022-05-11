@@ -4,7 +4,7 @@ import model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateConfigUtil {
+public class SessionFactoryUtil {
     private static final Configuration configuration = new Configuration();
     private static SessionFactory sessionFactory;
 

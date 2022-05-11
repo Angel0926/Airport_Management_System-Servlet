@@ -1,9 +1,7 @@
 package service.impl;
 
-import config.HibernateConfigUtil;
 import dao.impl.CompanyDaoImpl;
 import model.Company;
-import org.hibernate.SessionFactory;
 import service.CompanyService;
 
 import java.util.List;

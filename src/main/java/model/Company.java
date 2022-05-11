@@ -19,7 +19,7 @@ public class Company implements Serializable {
     @Column(name = "founding_date",nullable = false)
     private LocalDate foundingDate;
 
-    @OneToMany(mappedBy = "company",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Trip> trips = new ArrayList<>();
 
     public Company() {

@@ -1,14 +1,11 @@
 package dao.impl;
 
-import config.HibernateConfigUtil;
+import config.SessionFactoryUtil;
 import dao.AddressDao;
 import model.Address;
 
-import model.Company;
-import model.Passenger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import resource.IOimpl.AddressIOServiceImpl;
 
 
@@ -16,7 +13,7 @@ import java.util.Set;
 
 public class AddressDaoImpl implements AddressDao {
 
-    private final SessionFactory sessionFactory = HibernateConfigUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 
     public void createAddress(Address address) {
         Session session = sessionFactory.openSession();
