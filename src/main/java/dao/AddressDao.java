@@ -17,5 +17,4 @@ public interface AddressDao {
 
     void deleteById(long id);
 
-    Set<Address> getAll();
 }

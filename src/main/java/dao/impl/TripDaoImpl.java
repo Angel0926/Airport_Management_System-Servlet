@@ -1,6 +1,6 @@
 package dao.impl;
 
-import config.SessionFactoryUtil;
+import dao.util.HibernateUtil;
 import dao.TripDao;
 
 import model.Trip;
@@ -12,8 +12,7 @@ import java.util.List;
 
 
 public class TripDaoImpl implements TripDao {
-    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
-
+    private final SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
 
     @Override
     public void createTrip(Trip trip) {

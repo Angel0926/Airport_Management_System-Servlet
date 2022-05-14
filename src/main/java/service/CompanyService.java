@@ -16,6 +16,6 @@ public interface CompanyService {
 
     List<Company> get(int offset, int perPage, String sort);
 
-    public void save(Company company);
+    void save(Company company);
 
 }

@@ -1,6 +1,6 @@
 package service.impl;
 
-import config.SessionFactoryUtil;
+import dao.util.HibernateUtil;
 import dao.impl.CompanyDaoImpl;
 import model.Company;
 import model.Trip;
@@ -23,7 +23,7 @@ class TripServiceImplTest {
     private static final Configuration configuration = new Configuration();
     private final TripServiceImpl tripService = new TripServiceImpl();
     private final CompanyDaoImpl companyDao = new CompanyDaoImpl();
-    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
     private Trip trip;
     private Company company;
 

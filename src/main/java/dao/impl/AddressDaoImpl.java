@@ -1,19 +1,17 @@
 package dao.impl;
 
-import config.SessionFactoryUtil;
+import dao.util.HibernateUtil;
 import dao.AddressDao;
 import model.Address;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import resource.IOimpl.AddressIOServiceImpl;
 
 
-import java.util.Set;
 
 public class AddressDaoImpl implements AddressDao {
 
-    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
 
     public void createAddress(Address address) {
         Session session = sessionFactory.openSession();
@@ -65,10 +63,4 @@ public class AddressDaoImpl implements AddressDao {
         session.close();
     }
 
-    @Override
-    public Set<Address> getAll() {
-        AddressIOServiceImpl addressIOService = new AddressIOServiceImpl();
-
-        return addressIOService.createAddressFromFile();
-    }
 }

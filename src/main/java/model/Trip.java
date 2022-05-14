@@ -14,7 +14,6 @@ import java.util.Set;
 public class Trip implements Serializable {
     @Id
     private long id;
-
     @Column(name = "plane", nullable = false, length = 50)
     private String plane;
     @Column(name = "town_from", nullable = false, length = 50)
@@ -26,10 +25,9 @@ public class Trip implements Serializable {
     @Column(name = "time_in", nullable = false)
     private LocalTime timeIn;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_company", foreignKey = @ForeignKey(name = "company_trip_fk"))
     private Company company;
-
 
     @ManyToMany(mappedBy = "trips")
     private Set<Passenger> passengers = new HashSet<>();

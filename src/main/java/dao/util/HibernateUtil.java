@@ -1,14 +1,17 @@
-package config;
+package dao.util;
 
 import model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class SessionFactoryUtil {
-    private static final Configuration configuration = new Configuration();
-    private static SessionFactory sessionFactory;
+public class HibernateUtil {
 
-    public static SessionFactory getSessionFactory() {
+    private static final HibernateUtil instance = new HibernateUtil();
+    private HibernateUtil(){}
+    private  SessionFactory sessionFactory = buildSessionFactory();
+
+    private SessionFactory buildSessionFactory() {
+        Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(Address.class);
         configuration.addAnnotatedClass(Company.class);
         configuration.addAnnotatedClass(Passenger.class);
@@ -19,4 +22,14 @@ public class SessionFactoryUtil {
         }
         return sessionFactory;
     }
+
+    public SessionFactory getSessionFactory(){
+        return sessionFactory;
+    }
+
+    public static HibernateUtil getInstance(){
+        return instance;
+    }
+
+
 }

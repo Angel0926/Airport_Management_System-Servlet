@@ -1,6 +1,6 @@
 package dao.impl;
 
-import config.SessionFactoryUtil;
+import dao.util.HibernateUtil;
 import dao.CompanyDao;
 import model.Company;
 import org.hibernate.Session;
@@ -10,7 +10,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CompanyDaoImpl implements CompanyDao {
-    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
 
 
     @Override

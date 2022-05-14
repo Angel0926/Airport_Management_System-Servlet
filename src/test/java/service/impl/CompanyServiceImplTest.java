@@ -1,6 +1,6 @@
 package service.impl;
 
-import config.SessionFactoryUtil;
+import dao.util.HibernateUtil;
 import model.Company;
 
 import org.hibernate.Session;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CompanyServiceImplTest {
     private static final Configuration configuration = new Configuration();
 
-    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
     private final CompanyServiceImpl companyService = new CompanyServiceImpl();
     private Company company;
     @AfterEach

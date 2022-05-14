@@ -1,13 +1,11 @@
 package service.impl;
 
-import config.SessionFactoryUtil;
+import dao.util.HibernateUtil;
 import model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +19,7 @@ class PassengerServiceImplTest {
     private final PassengerServiceImpl passengerService = new PassengerServiceImpl();
     private Passenger passenger;
     private Address address;
-    private final SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getInstance().getSessionFactory();
 
     @AfterEach
     void cleanDatabase() {

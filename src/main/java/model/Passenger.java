@@ -17,11 +17,10 @@ public class Passenger {
     @Column(name = "phone",nullable = false,unique = true,length = 50)
     private String phone;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn(name = "id_address", foreignKey = @ForeignKey(name = "address_passenger_fk"))
    @OnDelete(action = OnDeleteAction.CASCADE)
     private Address address;
-
 
     @ManyToMany(cascade =  CascadeType.ALL )
     @JoinTable(
