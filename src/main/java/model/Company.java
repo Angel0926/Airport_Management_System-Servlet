@@ -33,6 +33,8 @@ public class Company implements Serializable {
 
     }
 
+
+
     public long getId() {
         return id;
     }

@@ -13,6 +13,7 @@ import java.util.Set;
 @Table(name = "trip")
 public class Trip implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "plane", nullable = false, length = 50)
     private String plane;
@@ -33,8 +34,7 @@ public class Trip implements Serializable {
     private Set<Passenger> passengers = new HashSet<>();
 
 
-    public Trip() {
-    }
+
 
     public Trip(String plane, String townFrom, String townTo, LocalTime timeOut, LocalTime timeIn) {
         this.plane = plane;
@@ -51,6 +51,10 @@ public class Trip implements Serializable {
         this.timeOut = timeOut;
         this.timeIn = timeIn;
         this.company = company;
+    }
+
+    public Trip() {
+
     }
 
     public long getId() {

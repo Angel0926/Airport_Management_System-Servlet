@@ -31,6 +31,7 @@ public class PassengerServiceImpl implements PassengerService {
     @Override
     public void delete(long id) {
         passengerDao.deleteById(id);
+
     }
 
     @Override

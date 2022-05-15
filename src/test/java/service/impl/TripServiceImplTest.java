@@ -54,7 +54,6 @@ class TripServiceImplTest {
         companyDao.createCompany(transComp);
         //company = companyDao.getCompanyById(1);
 
-        trip = new Trip();
         trip.setId(1);
         trip.setPlane("aaaa");
         trip.setTownFrom("bbbb");
@@ -83,7 +82,7 @@ class TripServiceImplTest {
 
     @Test
     void update() {
-       tripService.save(trip);
+        tripService.save(trip);
         Trip trip1 = new Trip("dsf", "fdg", "Fff", LocalTime.MAX, LocalTime.MIN);
         tripService.update(1L, trip1);
         Trip byId = tripService.getById(1);
